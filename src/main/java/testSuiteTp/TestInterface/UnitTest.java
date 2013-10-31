@@ -6,7 +6,6 @@ import testSuiteTp.exceptions.EqualsAssertException;
 public abstract class UnitTest {
 
 	private UnitTestState state = new UnitTestState();
-	
 	private String testName;
 	
 	protected UnitTest( String testName){ 

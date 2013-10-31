@@ -7,17 +7,19 @@ import testSuiteTp.logguer.TestLog;
 public abstract class TestSuite {
 
 	private List<UnitTest> activeTests = new ArrayList<UnitTest>();
-
+	String testSuiteName;
 	/**
 	 * Se declaran todos los tests que componen la suite
 	 */
 	protected abstract void configureTests();
 
-	/**
-	 * Se define el nombre de la suite
-	 * 
-	 */
-	protected abstract String getSuiteName();
+	protected TestSuite(String testSuiteName){
+		this.testSuiteName = testSuiteName;
+		}
+	
+	public String getSuiteName(){
+		return testSuiteName;
+		}
 
 	public void runAllTests() {
 		this.configureTests();
@@ -25,9 +27,9 @@ public abstract class TestSuite {
 		for (UnitTest test : this.activeTests) {
 			test.run();
 			testLog.addLog(test);
-		}
+			}
 		testLog.showResults();
-	}
+		}
 
 	/**
 	 * Agrega un test a la suite actual
