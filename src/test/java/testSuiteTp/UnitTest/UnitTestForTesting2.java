@@ -4,13 +4,12 @@ import testSuiteTp.TestInterface.UnitTest;
 
 public class UnitTestForTesting2 extends UnitTest{
 
-	@Override
-	public void run() {
-		assertEquals("Chau", "Hola");
+	UnitTestForTesting2(String testName) {
+		super(testName);
 	}
 
 	@Override
-	public String getName() {
-		return "Unit_test_2";
+	public void run() {
+		assertEquals("Chau", "Hola");
 	}
 }

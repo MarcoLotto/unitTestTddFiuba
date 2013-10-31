@@ -6,15 +6,17 @@ import testSuiteTp.exceptions.EqualsAssertException;
 public abstract class UnitTest {
 
 	private UnitTestState state = new UnitTestState();
+	
+	private String testName;
+	
+	protected UnitTest( String testName){ 
+		this.testName = testName ;
+		}
 
 	public abstract void run();
 
-	public abstract String getName();
-
 	public void assertTrue(boolean result) {
-		if (!result) {
-			throw new AssertException();
-		}
+		if (!result) { throw new AssertException(); }
 	}
 
 	public void assertFalse(boolean result) {
@@ -29,5 +31,9 @@ public abstract class UnitTest {
 
 	public UnitTestState getState() {
 		return state;
+	}
+
+	public String getName() {
+		return testName;
 	}
 }
