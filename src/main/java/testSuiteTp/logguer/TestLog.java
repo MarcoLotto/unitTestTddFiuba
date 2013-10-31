@@ -16,6 +16,8 @@ public class TestLog {
 	}
 
 	public void addLog(UnitTest test) {
+		// feature envy ?
+		// este if no me gusta =$
 		if (test.getState().isPassed()) {
 			this.passedTests.add(test);
 		} else {
