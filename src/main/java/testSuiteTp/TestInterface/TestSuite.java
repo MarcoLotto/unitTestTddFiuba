@@ -24,6 +24,7 @@ public abstract class TestSuite {
 		this.configureTests();
 		TestLog testLog = new TestLog(this.getSuiteName());
 		for (UnitTest test : this.activeTests) {
+			//ZARPADA feature envy
 			UnitTestState testState = test.getState();
 			try {
 				test.run();
