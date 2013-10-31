@@ -20,7 +20,7 @@ public class UnitTestState {
 
 	public String getExceptionMessage() {
 		//code smell ???
-		if ( passed != false ){
+		if ( passed == false ){
 			return failException.getMessage();
 		}
 		return "";
