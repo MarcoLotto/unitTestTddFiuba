@@ -29,8 +29,7 @@ public abstract class TestSuite {
 		for (UnitTest test : this.activeTests) {
 			test.run();
 		}
-		System.out.println("Tests for " + getSuiteName());
-		testLog.showResults(this.activeTests);
+		testLog.showResults(this.activeTests, this.getSuiteName());
 	}
 
 	/**
