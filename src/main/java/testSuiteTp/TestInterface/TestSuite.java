@@ -23,12 +23,12 @@ public abstract class TestSuite {
 
 	public void runAllTests() {
 		this.configureTests();
-		TestLog testLog = new TestLog(this.getSuiteName());
+		TestLog testLog = new TestLog();
 		for (UnitTest test : this.activeTests) {
 			test.run();
-			testLog.addLog(test);
 			}
-		testLog.showResults();
+		System.out.println( "Tests for " + getSuiteName() );
+		testLog.showResults(this.activeTests);
 		}
 
 	/**
