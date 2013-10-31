@@ -40,8 +40,12 @@ public abstract class UnitTest {
 		}
 	}
 
-	public UnitTestState getState() {
-		return state;
+	public boolean hasPassed() {
+		return state.isPassed();
+	}
+	
+	public String getExceptionMessage() {
+		return state.getExceptionMessage();
 	}
 
 	public String getName() {

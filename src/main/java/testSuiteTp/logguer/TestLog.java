@@ -18,7 +18,7 @@ public class TestLog {
 	public void addLog(UnitTest test) {
 		// feature envy ?
 		// este if no me gusta =$
-		if (test.getState().isPassed()) {
+		if (test.hasPassed()) {
 			this.passedTests.add(test);
 		} else {
 			this.failedTests.add(test);
@@ -29,8 +29,7 @@ public class TestLog {
 		System.out.println("Tests for " + this.suiteName);
 		System.out.println("Failed: " + this.failedTests.size());
 		for (UnitTest test : this.failedTests) {
-			Exception testFailException = test.getState().getFailException();
-			String message = test.getName() + ": " + testFailException.getMessage();
+			String message = test.getName() + ": " + test.getExceptionMessage();
 			System.out.println("	" + message);
 		}
 		System.out.println("Passed: " + this.passedTests.size());
