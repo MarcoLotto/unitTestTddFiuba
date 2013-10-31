@@ -1,7 +1,7 @@
 package testSuiteTp.TestInterface;
 public class UnitTestState {
 
-	private boolean passed;
+	private boolean passed = false;
 	private Exception failException;
 	
 	public boolean isPassed() {
@@ -18,7 +18,11 @@ public class UnitTestState {
 		this.passed = false;
 	}
 
-	public Exception getFailException() {
-		return failException;
+	public String getExceptionMessage() {
+		//code smell ???
+		if ( passed != false ){
+			return failException.getMessage();
+		}
+		return "";
 	}
 }
