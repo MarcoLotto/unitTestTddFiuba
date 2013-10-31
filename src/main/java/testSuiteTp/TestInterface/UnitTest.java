@@ -13,7 +13,19 @@ public abstract class UnitTest {
 		this.testName = testName ;
 		}
 
-	public abstract void run();
+	//Esta es la funcion con la cual se corre el test
+	public void run(){
+		try{
+			runThis();
+			state.setAsPassed();
+			}
+		catch(Exception e){
+			state.setAsFailed(e);
+			}
+		}
+	
+	//Esto es lo que el cliente debe implementar. El cuerpo del Test.
+	protected abstract void runThis();
 
 	public void assertTrue(boolean result) {
 		if (!result) { throw new AssertException(); }

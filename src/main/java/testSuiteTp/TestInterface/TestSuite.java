@@ -16,7 +16,6 @@ public abstract class TestSuite {
 	/**
 	 * Se define el nombre de la suite
 	 * 
-	 * @return
 	 */
 	protected abstract String getSuiteName();
 
@@ -24,14 +23,7 @@ public abstract class TestSuite {
 		this.configureTests();
 		TestLog testLog = new TestLog(this.getSuiteName());
 		for (UnitTest test : this.activeTests) {
-			//ZARPADA feature envy
-			UnitTestState testState = test.getState();
-			try {
-				test.run();
-				testState.setAsPassed(); // Esto no es muy lindo...
-			} catch (Exception e) {
-				testState.setAsFailed(e); // Esto menos...
-			}
+			test.run();
 			testLog.addLog(test);
 		}
 		testLog.showResults();

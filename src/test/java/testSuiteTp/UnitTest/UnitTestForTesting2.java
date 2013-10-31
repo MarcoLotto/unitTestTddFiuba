@@ -9,7 +9,7 @@ public class UnitTestForTesting2 extends UnitTest{
 	}
 
 	@Override
-	public void run() {
+	public void runThis() {
 		assertEquals("Chau", "Hola");
 	}
 }
