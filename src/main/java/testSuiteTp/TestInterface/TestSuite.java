@@ -5,9 +5,9 @@ import java.util.List;
 
 import testSuiteTp.logguer.TestLog;
 
-public abstract class TestSuite {
+public abstract class TestSuite extends TestComponent  {
 
-	private List<UnitTest> activeTests = new ArrayList<UnitTest>();
+	private List<TestComponent> activeTests = new ArrayList<TestComponent>();
 	String testSuiteName;
 
 	/**
@@ -22,22 +22,28 @@ public abstract class TestSuite {
 	public String getSuiteName() {
 		return testSuiteName;
 	}
-
-	public void runAllTests() {
+	
+	@Override
+	public void run() {
 		this.configureTests();
-		TestLog testLog = new TestLog();
-		for (UnitTest test : this.activeTests) {
+		this.setUp();
+		//TestLog testLog = new TestLog();
+		for (TestComponent test : this.activeTests) {
 			test.run();
 		}
-		testLog.showResults(this.activeTests, this.getSuiteName());
+		//testLog.showResults(this.activeTests, this.getSuiteName());
+	}
+	
+	@Override
+	protected void addReferenceToParent(TestComponent TestComp){
+		TestComp.addReferenceToParent(this);		
 	}
 
 	/**
-	 * Agrega un test a la suite actual
-	 * 
-	 * @param test
+	 * Agrega un Componente de Test a la Suite actual
 	 */
-	protected void addTest(UnitTest test) {
+	protected void add(TestComponent test) {
 		this.activeTests.add(test);
+		test.addReferenceToParent(this);
 	}
 }

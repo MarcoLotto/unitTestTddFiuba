@@ -10,10 +10,10 @@ public class TestSuiteForTesting extends TestSuite {
 
 	@Override
 	protected void configureTests() {
-		addTest(new UnitTestForTesting1("test1"));
-		addTest(new UnitTestForTesting2("test2"));
-		addTest(new UnitTestForTesting3("test3"));
-		addTest(new UnitTestForTesting4("test4"));
+		add(new UnitTestForTesting1("test1"));
+		add(new UnitTestForTesting2("test2"));
+		add(new UnitTestForTesting3("test3"));
+		add(new UnitTestForTesting4("test4"));
 	}
 
 }

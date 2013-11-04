@@ -9,7 +9,7 @@ public class ConceptTestForUnitTest {
 	@Test
 	public void conceptUnitTest() {
 		TestSuite suite = new TestSuiteForTesting("TestSuiteForTesting");
-		suite.runAllTests();
+		suite.run();
 	}
 
 }

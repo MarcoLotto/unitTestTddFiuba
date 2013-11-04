@@ -3,7 +3,7 @@ package testSuiteTp.TestInterface;
 import testSuiteTp.exceptions.AssertException;
 import testSuiteTp.exceptions.EqualsAssertException;
 
-public abstract class UnitTest {
+public abstract class UnitTest extends TestComponent{
 
 	private UnitTestState state = new UnitTestState();
 	private String testName;
@@ -28,7 +28,10 @@ public abstract class UnitTest {
 	 * Esto es lo que el cliente debe implementar. El cuerpo del Test.
 	 */
 	protected abstract void runThis();
-
+	
+	@Override
+	protected void addReferenceToParent(TestComponent TestComp){}
+	
 	public void assertTrue(boolean result) {
 		if (!result) {
 			throw new AssertException();
