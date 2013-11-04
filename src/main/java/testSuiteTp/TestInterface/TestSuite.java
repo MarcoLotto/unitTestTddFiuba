@@ -3,12 +3,12 @@ package testSuiteTp.TestInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
 
 public abstract class TestSuite extends TestComponent  {
 
 	private List<TestComponent> activeTests = new ArrayList<TestComponent>();
-	String testSuiteName;
 
 	/**
 	 * Se declaran todos los tests que componen la suite
@@ -16,11 +16,7 @@ public abstract class TestSuite extends TestComponent  {
 	protected abstract void configureTests();
 
 	protected TestSuite(String testSuiteName) {
-		this.testSuiteName = testSuiteName;
-	}
-
-	public String getSuiteName() {
-		return testSuiteName;
+		this.testName = testSuiteName;
 	}
 	
 	@Override
@@ -33,17 +29,27 @@ public abstract class TestSuite extends TestComponent  {
 		}
 		//testLog.showResults(this.activeTests, this.getSuiteName());
 	}
-	
-	@Override
-	protected void addReferenceToParent(TestComponent TestComp){
-		TestComp.addReferenceToParent(this);		
-	}
 
 	/**
 	 * Agrega un Componente de Test a la Suite actual
 	 */
 	protected void add(TestComponent test) {
-		this.activeTests.add(test);
+		this.checkNameUniqueness(test);
 		test.addReferenceToParent(this);
+		this.activeTests.add(test);
 	}
+	
+	//Si 2 hermanos tienen el mismo nombre,se para la aplicación
+	private void checkNameUniqueness(TestComponent TC){
+		boolean retV = false;
+		for (TestComponent test : this.activeTests) {
+			if ( test.itHasTheSameName(TC) ){
+				retV = true;
+				break;
+				}
+		}	
+		if ( retV ){ throw new TestError( TC.getName() ); }	
+	}
+	
+	
 }

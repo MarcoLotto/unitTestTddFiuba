@@ -6,7 +6,6 @@ import testSuiteTp.exceptions.EqualsAssertException;
 public abstract class UnitTest extends TestComponent{
 
 	private UnitTestState state = new UnitTestState();
-	private String testName;
 
 	protected UnitTest(String testName) {
 		this.testName = testName;
@@ -16,6 +15,7 @@ public abstract class UnitTest extends TestComponent{
 	 * Este es el metodo con el que se corre el test
 	 */
 	public void run() {
+		this.setUp();
 		try {
 			runThis();
 			state.setAsPassed();
@@ -28,9 +28,6 @@ public abstract class UnitTest extends TestComponent{
 	 * Esto es lo que el cliente debe implementar. El cuerpo del Test.
 	 */
 	protected abstract void runThis();
-	
-	@Override
-	protected void addReferenceToParent(TestComponent TestComp){}
 	
 	public void assertTrue(boolean result) {
 		if (!result) {
@@ -55,9 +52,5 @@ public abstract class UnitTest extends TestComponent{
 
 	public String getExceptionMessage() {
 		return state.getExceptionMessage();
-	}
-
-	public String getName() {
-		return testName;
 	}
 }
