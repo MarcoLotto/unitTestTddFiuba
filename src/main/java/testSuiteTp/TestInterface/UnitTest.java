@@ -3,7 +3,7 @@ package testSuiteTp.TestInterface;
 import testSuiteTp.exceptions.AssertException;
 import testSuiteTp.exceptions.EqualsAssertException;
 
-public abstract class UnitTest extends TestComponent{
+public abstract class UnitTest extends TestComponent {
 
 	private UnitTestState state = new UnitTestState();
 
@@ -14,13 +14,16 @@ public abstract class UnitTest extends TestComponent{
 	/**
 	 * Este es el metodo con el que se corre el test
 	 */
-	public void run() {
-		this.setUp();
-		try {
-			runThis();
-			state.setAsPassed();
-		} catch (Exception e) {
-			state.setAsFailed(e);
+
+	public void run(String regExp) {
+		if (this.getName().matches(regExp)){
+			this.setUp();
+			try {
+				runThis();
+				state.setAsPassed();
+			} catch (Exception e) {
+				state.setAsFailed(e);
+			}
 		}
 	}
 
@@ -28,7 +31,7 @@ public abstract class UnitTest extends TestComponent{
 	 * Esto es lo que el cliente debe implementar. El cuerpo del Test.
 	 */
 	protected abstract void runThis();
-	
+
 	public void assertTrue(boolean result) {
 		if (!result) {
 			throw new AssertException();
@@ -41,8 +44,8 @@ public abstract class UnitTest extends TestComponent{
 
 	public void assertEquals(Object expected, Object result) {
 		if (!expected.equals(result)) {
-			throw new EqualsAssertException(expected.toString(),
-					result.toString());
+			throw new EqualsAssertException(expected.toString(), result
+					.toString());
 		}
 	}
 

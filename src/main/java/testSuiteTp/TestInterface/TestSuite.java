@@ -18,18 +18,16 @@ public abstract class TestSuite extends TestComponent  {
 	protected TestSuite(String testSuiteName) {
 		this.testName = testSuiteName;
 	}
-	
-	@Override
-	public void run() {
+
+	public void run(String regExp) {
 		this.configureTests();
 		this.setUp();
 		//TestLog testLog = new TestLog();
 		for (TestComponent test : this.activeTests) {
-			test.run();
+			test.run( regExp );
 		}
 		//testLog.showResults(this.activeTests, this.getSuiteName());
 	}
-
 	/**
 	 * Agrega un Componente de Test a la Suite actual
 	 */

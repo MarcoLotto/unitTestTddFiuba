@@ -1,18 +1,24 @@
 package testSuiteTp.TestInterface;
 
 public abstract class TestComponent {
-
+	
+	private static final String REG_EXP_NULL = ".*";
+	
 	protected TestSuite ParentTest;
 	String testName;
 
-	public void run(){};
+	public void run() {
+		this.run(REG_EXP_NULL);
+	}
+	
+	abstract public void run( String regExp );
 	
 	public void setUp(){};
 	
 	public void tearDown(){};
 	
 	public String getName() {
-		return testName;
+		return this.testName;
 	}
 	
 	protected void addReferenceToParent(TestSuite TestS){
