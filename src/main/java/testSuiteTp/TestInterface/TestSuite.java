@@ -6,10 +6,11 @@ import java.util.List;
 import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
 
-public abstract class TestSuite extends TestComponent  {
-
-	private List<TestComponent> activeTests = new ArrayList<TestComponent>();
-
+public abstract class TestSuite extends TestComponent {
+	
+	private List<UnitTest> activeUnitTests = new ArrayList<UnitTest>();
+	private List<TestSuite> activeTestSuites = new ArrayList<TestSuite>();
+	
 	/**
 	 * Se declaran todos los tests que componen la suite
 	 */
@@ -22,31 +23,44 @@ public abstract class TestSuite extends TestComponent  {
 	public void run(String regExp) {
 		this.configureTests();
 		this.setUp();
-		//TestLog testLog = new TestLog();
-		for (TestComponent test : this.activeTests) {
+		TestLog testLog = new TestLog();
+		for (TestComponent test : this.activeUnitTests) {
 			test.run( regExp );
 		}
-		//testLog.showResults(this.activeTests, this.getSuiteName());
+		testLog.showResults(this.activeUnitTests, this.getName());
+		
+		for (TestComponent testSuite : this.activeUnitTests) {
+			testSuite.run(regExp);			
+		}
 	}
 	/**
 	 * Agrega un Componente de Test a la Suite actual
 	 */
-	protected void add(TestComponent test) {
-		this.checkNameUniqueness(test);
-		test.addReferenceToParent(this);
-		this.activeTests.add(test);
+	//POR FAVOR REFACTORIZAR
+	protected void add(TestSuite testSuite) {
+		this.checkNameUniqueness(testSuite,this.activeTestSuites);
+		this.activeTestSuites.add(testSuite);
+		testSuite.addReferenceToParent(this);
 	}
 	
+	protected void add(UnitTest unitTest) {
+		this.checkNameUniqueness(unitTest,this.activeUnitTests);
+		this.activeUnitTests.add(unitTest);
+		unitTest.addReferenceToParent(this);
+	}
+	
+	//private void addToList(TestComponent testComponent, List activeTests) {}
+	
 	//Si 2 hermanos tienen el mismo nombre,se para la aplicación
-	private void checkNameUniqueness(TestComponent TC){
+	private void checkNameUniqueness(TestComponent testComponent, List activeTests){
 		boolean retV = false;
-		for (TestComponent test : this.activeTests) {
-			if ( test.itHasTheSameName(TC) ){
+		for (TestComponent test : (List<TestComponent>)activeTests) {
+			if ( test.itHasTheSameName(testComponent) ){
 				retV = true;
 				break;
 				}
 		}	
-		if ( retV ){ throw new TestError( TC.getName() ); }	
+		if ( retV ){ throw new TestError( testComponent.getName() ); }	
 	}
 	
 	
