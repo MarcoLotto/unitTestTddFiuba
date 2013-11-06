@@ -2,18 +2,24 @@ package testSuiteTp.UnitTest;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import testSuiteTp.TestInterface.TestSuite;
 import testSuiteTp.TestInterface.UnitTest;
 
 public class TestingUnitTest {
+	UnitTest test1;
+	
+	@Before
+	public void setUp(){
+		test1 = new UnitTestForTesting1("Test1");	
+	}
 
 	@Test
 	public void testMustPass1() {
-		UnitTest test = new UnitTestForTesting1("Test1");
-		test.run();
-		assertTrue(test.hasPassed());
+		test1.run();
+		assertTrue(test1.hasPassed());
 	}
 
 	@Test

@@ -2,7 +2,7 @@ package testSuiteTp.TestInterface;
 
 public abstract class TestComponent {
 	
-	private static final String REG_EXP_NULL = ".*";
+	private static final String REG_EXP_NULL = ".*" ;
 	
 	protected TestSuite ParentTest;
 	String testName;
