@@ -13,8 +13,8 @@ public class Failed implements State {
 	}
 
 	@Override
-	public int getResult() {
-		return -1;
+	public ResultEnum getResult() {
+		return ResultEnum.FAIL;
 	}
 
 }

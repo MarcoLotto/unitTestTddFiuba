@@ -20,7 +20,7 @@ public class UnitTestState {
 		return this.state.getMessage();		
 	}
 	
-	public int getResult(){
+	public ResultEnum getResult(){
 		return this.state.getResult();		
 	}
 }

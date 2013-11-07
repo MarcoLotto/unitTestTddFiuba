@@ -53,12 +53,12 @@ public abstract class UnitTest extends TestComponent {
 	//	assertTrue(false);
 	//}
 	
-	public int getResult() {
+	public ResultEnum getResult() {
 		return state.getResult();
 	}
 	
 	public boolean hasPassed(){
-		return (state.getResult() == 1);
+		return (state.getResult() == ResultEnum.OK);
 	}
 
 	public String getMessage() {

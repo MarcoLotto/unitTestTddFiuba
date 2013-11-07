@@ -4,5 +4,5 @@ public interface State {
 	
 	public String getMessage();
 	
-	public int getResult();
+	public ResultEnum getResult();
 }

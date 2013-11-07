@@ -4,12 +4,12 @@ public class NotTested implements State {
 
 	@Override
 	public String getMessage() {
-		return "Test wasn't run";
+		return "[Not Tested]";
 	}
 
 	@Override
-	public int getResult() {
-		return 0;
+	public ResultEnum getResult() {
+		return ResultEnum.NOTTESTED;
 	}
 
 }
