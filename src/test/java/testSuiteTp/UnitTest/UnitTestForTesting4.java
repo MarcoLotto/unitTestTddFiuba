@@ -21,7 +21,7 @@ public class UnitTestForTesting4 extends UnitTest {
 	protected void runThis(Context context) {
 		try{
 			String suiteVariable2 = (String) context.getElement("suiteVariable2");
-			fail();
+			assertTrue(false);
 		}
 		catch(ContextElementDoesNotExist e){
 			

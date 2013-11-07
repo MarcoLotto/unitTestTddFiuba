@@ -13,6 +13,16 @@ public abstract class TestComponent {
 		this.run(emptyContext, REG_EXP_NULL);
 	}
 	
+	public void run(String regExp) {
+		Context emptyContext = new Context();
+		this.run(emptyContext, regExp );
+	}
+	
+	public void run(Context parentContext) {
+		Context emptyContext = new Context();
+		this.run(emptyContext, REG_EXP_NULL );
+	}
+	
 	abstract public void run(Context parentContext, String regExp );
 	
 	public void setUp(Context context){};

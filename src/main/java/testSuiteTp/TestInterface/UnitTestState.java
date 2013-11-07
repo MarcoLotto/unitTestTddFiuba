@@ -2,31 +2,25 @@ package testSuiteTp.TestInterface;
 
 public class UnitTestState {
 	
-	//aca va un patron state ( maquina de estados )
-	// NotTested
-	// Passed
-	// Failed
-	private boolean passed = false;
-	private Exception failException;
-
-	public boolean isPassed() {
-		return passed;
+	State state;
+	
+	UnitTestState(){
+		this.state = new NotTested();
 	}
 
 	public void setAsPassed() {
-		this.passed = true;
-		this.failException = null;
+		this.state = new Passed();
 	}
 
 	public void setAsFailed(Exception exception) {
-		this.failException = exception;
-		this.passed = false;
+		this.state = new Failed(exception);
 	}
-
-	public String getExceptionMessage() {
-		if (passed == false) {
-			return failException.getMessage();
-		}
-		return "";
+	
+	public String getMessage(){
+		return this.state.getMessage();		
+	}
+	
+	public int getResult(){
+		return this.state.getResult();		
 	}
 }

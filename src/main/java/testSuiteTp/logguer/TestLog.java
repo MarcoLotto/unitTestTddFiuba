@@ -13,10 +13,10 @@ public class TestLog {
 		
 		this.filterPassedFailed(totalTests, passedTests, failedTests);
 		
-		System.out.println("Tests for " + suiteName);
+		System.out.println("Tests for :" + suiteName);
 		System.out.println("Failed: " + failedTests.size());
 		for (UnitTest test : failedTests) {
-			String message = test.getName() + ": " + test.getExceptionMessage();
+			String message = test.getName() + ": " + test.getMessage();
 			System.out.println("	" + message);
 		}
 		System.out.println("Passed: " + passedTests.size());

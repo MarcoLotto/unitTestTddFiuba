@@ -45,20 +45,23 @@ public abstract class UnitTest extends TestComponent {
 
 	public void assertEquals(Object expected, Object result) {
 		if (!expected.equals(result)) {
-			throw new EqualsAssertException(expected.toString(), result
-					.toString());
+			throw new EqualsAssertException(expected.toString(), result.toString());
 		}
 	}
 
-	public void fail(){
-		assertTrue(false);
+	//public void fail(){
+	//	assertTrue(false);
+	//}
+	
+	public int getResult() {
+		return state.getResult();
 	}
 	
-	public boolean hasPassed() {
-		return state.isPassed();
+	public boolean hasPassed(){
+		return (state.getResult() == 1);
 	}
 
-	public String getExceptionMessage() {
-		return state.getExceptionMessage();
+	public String getMessage() {
+		return state.getMessage();
 	}
 }

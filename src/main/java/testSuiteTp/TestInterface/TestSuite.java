@@ -20,7 +20,7 @@ public abstract class TestSuite extends TestComponent {
 		this.testName = testSuiteName;
 	}
 
-	public void run(Context parentContext, String regExp) {
+	final public void run(Context parentContext, String regExp) {
 		this.prepareContext(parentContext);
 		this.configureTests();
 		this.setUp(this.context);
