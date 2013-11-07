@@ -1,5 +1,6 @@
 package testSuiteTp.UnitTest;
 
+import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 
 public class UnitTestForTesting3 extends UnitTest{
@@ -9,7 +10,7 @@ public class UnitTestForTesting3 extends UnitTest{
 	}
 
 	@Override
-	protected void runThis() {
+	protected void runThis(Context context) {
 		assertEquals("1", "1");
 		assertTrue(56667==56667);
 		assertFalse( "nunca" == "siempre" );

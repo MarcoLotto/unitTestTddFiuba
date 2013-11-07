@@ -14,12 +14,12 @@ public abstract class UnitTest extends TestComponent {
 	/**
 	 * Este es el metodo con el que se corre el test
 	 */
-
-	public void run(String regExp) {
+	public void run(Context parentContext, String regExp) {
 		if (this.getName().matches(regExp)){
-			this.setUp();
+			this.mergeWithParentContext(parentContext);
+			this.setUp(this.context);
 			try {
-				runThis();
+				this.runThis(this.context);
 				state.setAsPassed();
 			} catch (Exception e) {
 				state.setAsFailed(e);
@@ -29,8 +29,9 @@ public abstract class UnitTest extends TestComponent {
 
 	/**
 	 * Esto es lo que el cliente debe implementar. El cuerpo del Test.
+	 * @param context 
 	 */
-	protected abstract void runThis();
+	protected abstract void runThis(Context context);
 
 	public void assertTrue(boolean result) {
 		if (!result) {
@@ -49,6 +50,10 @@ public abstract class UnitTest extends TestComponent {
 		}
 	}
 
+	public void fail(){
+		assertTrue(false);
+	}
+	
 	public boolean hasPassed() {
 		return state.isPassed();
 	}

@@ -23,6 +23,7 @@ public class TestLog {
 		for (UnitTest test : passedTests) {
 			System.out.println("	" + test.getName());
 		}
+		System.out.println();
 	}
 
 	private void filterPassedFailed(List<UnitTest> totalTests,List<UnitTest> passedT,List<UnitTest> failedT){

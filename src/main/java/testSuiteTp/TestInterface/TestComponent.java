@@ -4,18 +4,20 @@ public abstract class TestComponent {
 	
 	private static final String REG_EXP_NULL = ".*" ;
 	
+	protected Context context = new Context();
 	protected TestSuite ParentTest;
 	String testName;
 
 	public void run() {
-		this.run(REG_EXP_NULL);
+		Context emptyContext = new Context();
+		this.run(emptyContext, REG_EXP_NULL);
 	}
 	
-	abstract public void run( String regExp );
+	abstract public void run(Context parentContext, String regExp );
 	
-	public void setUp(){};
+	public void setUp(Context context){};
 	
-	public void tearDown(){};
+	public void tearDown(Context context){};
 	
 	public String getName() {
 		return this.testName;
@@ -30,6 +32,14 @@ public abstract class TestComponent {
 		boolean retV = false;
 		if ( this.getName() == TC.getName() ){ retV = true; }
 		return retV;
+	}
+	
+	protected void mergeWithParentContext(Context parentContext) {
+		this.context.merge(parentContext);		
+	}
+
+	public Context getContext() {
+		return this.context;
 	}
 	
 }
