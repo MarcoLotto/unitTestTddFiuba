@@ -49,33 +49,32 @@ public abstract class TestSuite extends TestComponent {
 	/**
 	 * Agrega un Componente de Test a la Suite actual
 	 */
-	// POR FAVOR REFACTORIZAR
+
 	protected void add(TestSuite testSuite) {
-		this.checkNameUniqueness(testSuite, this.activeTestSuites);
-		this.activeTestSuites.add(testSuite);
-		testSuite.addReferenceToParent(this);
+		this.addToList(testSuite,this.activeTestSuites );
 	}
 
 	protected void add(UnitTest unitTest) {
-		this.checkNameUniqueness(unitTest, this.activeUnitTests);
-		this.activeUnitTests.add(unitTest);
-		unitTest.addReferenceToParent(this);
+		this.addToList(unitTest,this.activeUnitTests);
+	}
+	
+	private <T extends TestComponent> void addToList(T testC,List<T> activeTests){
+		this.checkNameUniqueness(testC, activeTests);	
+		activeTests.add(testC);
+		testC.addReferenceToParent(this);
 	}
 
-	// private void addToList(TestComponent testComponent, List activeTests) {}
-
 	// Si 2 hermanos tienen el mismo nombre,se para la aplicación
-	private void checkNameUniqueness(TestComponent testComponent,
-			List activeTests) {
+	private <T extends TestComponent> void  checkNameUniqueness(T testC,List<T> activeTests) {
 		boolean retV = false;
-		for (TestComponent test : (List<TestComponent>) activeTests) {
-			if (test.itHasTheSameName(testComponent)) {
+		for (TestComponent test : activeTests) {
+			if (test.itHasTheSameName(testC)) {
 				retV = true;
 				break;
 			}
 		}
 		if (retV) {
-			throw new TestError(testComponent.getName());
+			throw new TestError(testC.getName());
 		}
 	}
 
