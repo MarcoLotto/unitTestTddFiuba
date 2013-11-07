@@ -10,6 +10,7 @@ public abstract class TestSuite extends TestComponent {
 
 	private List<UnitTest> activeUnitTests = new ArrayList<UnitTest>();
 	private List<TestSuite> activeTestSuites = new ArrayList<TestSuite>();
+	private TestLog testLog;
 
 	/**
 	 * Se declaran todos los tests que componen la suite
@@ -18,18 +19,19 @@ public abstract class TestSuite extends TestComponent {
 
 	protected TestSuite(String testSuiteName) {
 		this.testName = testSuiteName;
+		this.testLog = new TestLog(testSuiteName);
 	}
 
 	final public void run(Context parentContext, String regExp) {
 		this.prepareContext(parentContext);
 		this.configureTests();
 		this.setUp(this.context);
-		TestLog testLog = new TestLog();
 		for (TestComponent test : this.activeUnitTests) {
 			test.run(this.context, regExp);
 		}
-		testLog.showResults(this.activeUnitTests, this.getName());
-
+		testLog.processResults(this.activeUnitTests);
+		testLog.showResults();
+		
 		for (TestComponent testSuite : this.activeTestSuites) {
 			testSuite.run(this.context, regExp);
 		}
@@ -50,11 +52,11 @@ public abstract class TestSuite extends TestComponent {
 	 * Agrega un Componente de Test a la Suite actual
 	 */
 
-	protected void add(TestSuite testSuite) {
+	public void add(TestSuite testSuite) {
 		this.addToList(testSuite,this.activeTestSuites );
 	}
 
-	protected void add(UnitTest unitTest) {
+	public void add(UnitTest unitTest) {
 		this.addToList(unitTest,this.activeUnitTests);
 	}
 	
