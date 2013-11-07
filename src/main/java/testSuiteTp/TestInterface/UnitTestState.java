@@ -1,7 +1,11 @@
 package testSuiteTp.TestInterface;
 
 public class UnitTestState {
-
+	
+	//aca va un patron state ( maquina de estados )
+	// NotTested
+	// Passed
+	// Failed
 	private boolean passed = false;
 	private Exception failException;
 
