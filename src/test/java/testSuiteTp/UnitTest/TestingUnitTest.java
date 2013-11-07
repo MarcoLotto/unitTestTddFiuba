@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.TestSuite;
 import testSuiteTp.TestInterface.UnitTest;
 
@@ -18,7 +19,10 @@ public class TestingUnitTest {
 
 	@Test
 	public void testMustPass1() {
-		test1.run();
+		Context context = new Context();
+		context.setElement("suiteVariable1", "Chau", test1);
+		test1.setUp(context);
+		test1.run(context, ".*");
 		assertTrue(test1.hasPassed());
 	}
 
