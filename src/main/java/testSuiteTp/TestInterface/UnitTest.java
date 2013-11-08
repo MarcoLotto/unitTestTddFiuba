@@ -19,7 +19,7 @@ public abstract class UnitTest extends TestComponent {
 			this.mergeWithParentContext(parentContext);
 			this.setUp(this.context);
 			try {
-				this.runThis(this.context);
+				this.runThis();
 				state.setAsPassed();
 			} catch (Exception e) {
 				state.setAsFailed(e);
@@ -29,9 +29,8 @@ public abstract class UnitTest extends TestComponent {
 
 	/**
 	 * Esto es lo que el cliente debe implementar. El cuerpo del Test.
-	 * @param context 
 	 */
-	protected abstract void runThis(Context context);
+	protected abstract void runThis();
 
 	public void assertTrue(boolean result) {
 		if (!result) {
@@ -49,9 +48,9 @@ public abstract class UnitTest extends TestComponent {
 		}
 	}
 
-	//public void fail(){
-	//	assertTrue(false);
-	//}
+	public void fail(){
+		assertTrue(false);
+	}
 	
 	public ResultEnum getResult() {
 		return state.getResult();

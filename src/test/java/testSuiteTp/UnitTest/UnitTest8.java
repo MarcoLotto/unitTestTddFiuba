@@ -1,6 +1,5 @@
 package testSuiteTp.UnitTest;
 
-import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 
 public class UnitTest8 extends UnitTest{
@@ -10,7 +9,7 @@ public class UnitTest8 extends UnitTest{
 	}
 
 	@Override
-	protected void runThis(Context context) {
+	protected void runThis() {
 		this.assertEquals( 5 , 5 );
 		this.assertEquals( 0 , 0 );
 		this.assertFalse( "124343" == "hola");

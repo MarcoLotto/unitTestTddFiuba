@@ -1,8 +1,5 @@
 package testSuiteTp.UnitTest;
 
-import javax.naming.ContextNotEmptyException;
-
-import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 import testSuiteTp.exceptions.ContextElementDoesNotExist;
 
@@ -18,7 +15,7 @@ public class UnitTest4 extends UnitTest {
 	 *  
 	 * @Override
 	 */
-	protected void runThis(Context context) {
+	protected void runThis() {
 		try{
 			String suiteVariable2 = (String) context.getElement("suiteVariable2");
 			assertTrue(false);

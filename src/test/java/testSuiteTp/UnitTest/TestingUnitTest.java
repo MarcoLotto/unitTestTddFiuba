@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import testSuiteTp.TestInterface.Context;
-import testSuiteTp.TestInterface.TestSuite;
 import testSuiteTp.TestInterface.UnitTest;
 
 public class TestingUnitTest {

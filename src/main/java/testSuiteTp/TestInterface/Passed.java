@@ -4,7 +4,7 @@ public class Passed implements State {
 
 	@Override
 	public String getMessage() {
-		return "Successful";
+		return "Success";
 	}
 
 	@Override

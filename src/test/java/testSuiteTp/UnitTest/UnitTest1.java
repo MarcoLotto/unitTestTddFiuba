@@ -10,12 +10,12 @@ public class UnitTest1 extends UnitTest{
 	}
 	
 	@Override
-	public void setUp(Context context){
-		context.setElement("localVariable1", "Hola", this);
+	public void setUp(Context cont){
+		cont.setElement("localVariable1", "Hola", this);
 	}
 
 	@Override
-	public void runThis(Context context) {
+	public void runThis() {
 		String localVariable1 = (String) context.getElement("localVariable1");
 		String suiteVariable1 = (String) context.getElement("suiteVariable1");
 		

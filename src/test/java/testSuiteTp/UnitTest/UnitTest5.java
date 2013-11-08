@@ -1,6 +1,5 @@
 package testSuiteTp.UnitTest;
 
-import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 
 public class UnitTest5 extends UnitTest{
@@ -10,7 +9,7 @@ public class UnitTest5 extends UnitTest{
 	}
 
 	@Override
-	protected void runThis(Context context) {
+	protected void runThis() {
 		//Consigo una variable de la testSuite 2, modifico su valor y verifico que haya cambiado
 		int suiteVariable2 = (Integer) context.getElement("suiteVariable2");
 		assertEquals(5, suiteVariable2);
