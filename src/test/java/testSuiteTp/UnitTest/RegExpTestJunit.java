@@ -36,12 +36,13 @@ public class RegExpTestJunit {
 	}
 	
 	@Test
-	public void Test1(){	
+	public void Test1(){	;
 		ts.run(".*HOLA.*");
-		assertFalse(testa.hasPassed());
-		assertEquals( testb.hasPassed() , true );
+		assertEquals( testa.getResult() , ResultEnum.FAIL );
+		assertEquals( testb.getResult() , ResultEnum.OK );
 		assertEquals( testc.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
+		assertEquals( teste.getResult() , ResultEnum.NOTTESTED );
 	}
 
 }
