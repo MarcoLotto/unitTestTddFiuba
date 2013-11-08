@@ -20,9 +20,9 @@ public class RegExpTestJunit {
 	private UnitTest teste;
 	private UnitTest testZ;
 	@Before
-	public void setear(){
-		ts = new RegExpTest("TestSuiteTom");
-		tsJunior = new RegExpTest("TestSuiteJunior");
+	public void setUp(){
+		ts = new DefaultTestSuite("TestSuiteTom");
+		tsJunior = new DefaultTestSuite("TestSuiteJunior");
 		
 		testa = new UnitTest2("HOLAxxx");
 		testb = new UnitTest9("xxxHOLAxxx") ;

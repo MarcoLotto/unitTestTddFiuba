@@ -2,9 +2,9 @@ package testSuiteTp.UnitTest;
 
 import testSuiteTp.TestInterface.TestSuite;
 
-public class RegExpTest extends TestSuite {
+public class DefaultTestSuite extends TestSuite {
 
-	public RegExpTest(String testSuiteName) {
+	public DefaultTestSuite(String testSuiteName) {
 		super(testSuiteName);
 	}
 

@@ -11,6 +11,7 @@ public abstract class TestSuite extends TestComponent {
 	private List<UnitTest> activeUnitTests = new ArrayList<UnitTest>();
 	private List<TestSuite> activeTestSuites = new ArrayList<TestSuite>();
 	private TestLog testLog;
+	private String pathFromRoot ="";
 
 	/**
 	 * Se declaran todos los tests que componen la suite
@@ -19,13 +20,14 @@ public abstract class TestSuite extends TestComponent {
 
 	public TestSuite(String testSuiteName) {
 		this.testName = testSuiteName;
-		this.testLog = new TestLog(testSuiteName);
+		this.testLog = new TestLog();
 	}
 
 	final public void run(Context parentContext, String regExp) {
 		this.prepareContext(parentContext);
 		this.configureTests();
 		this.setUp(this.context);
+		this.testLog.setPath( this.pathFromRoot + this.getName() );
 		for (TestComponent test : this.activeUnitTests) {
 			test.run(this.context, regExp);
 		}
@@ -54,6 +56,14 @@ public abstract class TestSuite extends TestComponent {
 
 	final public void add(TestSuite testSuite) {
 		this.addToList(testSuite,this.activeTestSuites );
+		if ( this.ParentTest != null){
+			System.out.println("sss");
+			testSuite.setPath( this.pathFromRoot + this.getName() + "." );
+		}
+		else{
+			System.out.println("ddd");
+			testSuite.setPath( this.getName() + "." );				
+		}
 	}
 
 	final public void add(UnitTest unitTest) {
@@ -78,6 +88,10 @@ public abstract class TestSuite extends TestComponent {
 		if (retV) {
 			throw new TestError(testC.getName());
 		}
+	}
+	
+	private void setPath(String path){
+		this.pathFromRoot = path;		
 	}
 
 }
