@@ -57,11 +57,9 @@ public abstract class TestSuite extends TestComponent {
 	final public void add(TestSuite testSuite) {
 		this.addToList(testSuite,this.activeTestSuites );
 		if ( this.ParentTest != null){
-			System.out.println("sss");
 			testSuite.setPath( this.pathFromRoot + this.getName() + "." );
 		}
 		else{
-			System.out.println("ddd");
 			testSuite.setPath( this.getName() + "." );				
 		}
 	}
@@ -92,6 +90,9 @@ public abstract class TestSuite extends TestComponent {
 	
 	private void setPath(String path){
 		this.pathFromRoot = path;		
+	}
+	public String getPath(){
+		return this.pathFromRoot;
 	}
 
 }

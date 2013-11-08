@@ -1,9 +1,12 @@
 package testSuiteTp.UnitTest;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import testSuiteTp.TestInterface.ResultEnum;
 import testSuiteTp.TestInterface.TestSuite;
 import testSuiteTp.TestInterface.UnitTest;
 
@@ -38,7 +41,13 @@ public class ChainedNamesTest {
 	}
 	@Test
 	public void LongNameTest(){
-		ts1.run();				
+		ts1.run();
+		
+		assertEquals( ut1.getResult() , ResultEnum.OK );
+		assertEquals ( ut2.getResult() , ResultEnum.OK );
+		
+		assertEquals ( ts6.getPath()+ts6.getName() , "A.B.C.D.E2" );
+		assertEquals ( ts5.getPath()+ts5.getName() , "A.B.C.D.E1" );
 	}
 
 }
