@@ -7,7 +7,7 @@ public abstract class UnitTest extends TestComponent {
 
 	private UnitTestState state = new UnitTestState();
 
-	protected UnitTest(String testName) {
+	public UnitTest(String testName) {
 		this.testName = testName;
 	}
 
