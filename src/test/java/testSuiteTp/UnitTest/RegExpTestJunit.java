@@ -12,23 +12,32 @@ import testSuiteTp.TestInterface.UnitTest;
 
 public class RegExpTestJunit {
 	private TestSuite ts;
+	private TestSuite tsJunior;
 	private UnitTest testa;
 	private UnitTest testb;
 	private UnitTest testc;
 	private UnitTest testd;
 	private UnitTest teste;
+	private UnitTest testZ;
 	@Before
 	public void setear(){
-		ts = new RegExpTest("TestSuiteTom");	
+		ts = new RegExpTest("TestSuiteTom");
+		tsJunior = new RegExpTest("TestSuiteJunior");
+		
 		testa = new UnitTest2("HOLAxxx");
 		testb = new UnitTest9("xxxHOLAxxx") ;
 		testc = new UnitTest8("xxxxxxxchauxxxxx");
 		testd = new UnitTest4("test4");
 		teste = new UnitTest7("xHxOLA");
 		
+		testZ = new UnitTest9("xHOLAxTestZ");
+		
+		tsJunior.add(testZ);
+		
 		ts.add(testa);
 		ts.add(testb);
 		ts.add(testc);
+		ts.add(tsJunior);
 		ts.add(testd);
 		ts.add(teste);
 	}
@@ -41,6 +50,7 @@ public class RegExpTestJunit {
 		assertEquals( testc.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( teste.getResult() , ResultEnum.NOTTESTED );
+		assertEquals ( testZ.getResult() , ResultEnum.OK );
 	}
 	@Test
 	public void Test2(){
@@ -50,6 +60,7 @@ public class RegExpTestJunit {
 		assertEquals( testc.getResult() , ResultEnum.OK );
 		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( teste.getResult() , ResultEnum.NOTTESTED );
+		assertEquals ( testZ.getResult() , ResultEnum.NOTTESTED );
 	}
 	@Test
 	public void Test3(){
@@ -59,6 +70,7 @@ public class RegExpTestJunit {
 		assertEquals( testc.getResult() , ResultEnum.OK );
 		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( teste.getResult() , ResultEnum.OK );
+		assertEquals ( testZ.getResult() , ResultEnum.OK );
 	}
 
 }
