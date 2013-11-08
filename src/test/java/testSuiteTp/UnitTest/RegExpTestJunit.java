@@ -1,8 +1,6 @@
 package testSuiteTp.UnitTest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,13 +34,31 @@ public class RegExpTestJunit {
 	}
 	
 	@Test
-	public void Test1(){	;
+	public void Test1(){
 		ts.run(".*HOLA.*");
 		assertEquals( testa.getResult() , ResultEnum.FAIL );
 		assertEquals( testb.getResult() , ResultEnum.OK );
 		assertEquals( testc.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
 		assertEquals( teste.getResult() , ResultEnum.NOTTESTED );
+	}
+	@Test
+	public void Test2(){
+		ts.run(".*chau.*");
+		assertEquals( testa.getResult() , ResultEnum.NOTTESTED );
+		assertEquals( testb.getResult() , ResultEnum.NOTTESTED);
+		assertEquals( testc.getResult() , ResultEnum.OK );
+		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
+		assertEquals( teste.getResult() , ResultEnum.NOTTESTED );
+	}
+	@Test
+	public void Test3(){
+		ts.run(".*x.*");
+		assertEquals( testa.getResult() , ResultEnum.FAIL );
+		assertEquals( testb.getResult() , ResultEnum.OK);
+		assertEquals( testc.getResult() , ResultEnum.OK );
+		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
+		assertEquals( teste.getResult() , ResultEnum.OK );
 	}
 
 }
