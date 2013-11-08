@@ -100,7 +100,6 @@ public class TestForTestSuite {
 	 */
 	@Test
 	public void sameTestSuitesNamesNotAllowed() {
-		UnitTest test1Repetido = new UnitTest7("TestUnit7");
 		TestSuite testSuiteA = new TestSuiteForTest1("Child TestSuite");
 		TestSuite testSuiteB = new TestSuiteForTest1("Child TestSuite");
 		
