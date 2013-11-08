@@ -3,15 +3,18 @@ package testSuiteTp.UnitTest;
 import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 
-public class UnitTest7 extends UnitTest{
+public class UnitTest8 extends UnitTest{
 
-	public UnitTest7(String testName) {
+	public UnitTest8(String testName) {
 		super(testName);
 	}
 
 	@Override
 	protected void runThis(Context context) {
-		this.assertFalse("theskyisred"=="false");		
+		this.assertEquals( 5 , 5 );
+		this.assertEquals( 0 , 0 );
+		this.assertFalse( "124343" == "hola");
 	}
+	
 
 }

@@ -10,11 +10,7 @@ public class RegExpTest extends TestSuite {
 
 	@Override
 	protected void configureTests() {
-		add(new UnitTest2("HOLAxxx"));
-		add(new UnitTest3("xxxHOLAxxx") );
-		add(new UnitTest3("hola"));
-		add(new UnitTest4("test4"));
-		add(new UnitTest2("xHxOLA"));
+		
 	}
 
 }
