@@ -7,6 +7,11 @@ import java.util.Map;
 
 import testSuiteTp.TestInterface.UnitTest;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+
 public class TestLog {
 	
 	private String PathFromRoot;
@@ -27,6 +32,18 @@ public class TestLog {
 	}
 	
 	public void showResults() {	
+		PrintStream console = System.out;
+
+		File file = new File("TestLogs.txt");
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file,true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		PrintStream ps = new PrintStream(fos);
+		System.setOut(ps);
+		
 		Collection<UnitTest> testsRealized = this.testsMaked.values(); 
 		System.out.println("Tests for :"+this.PathFromRoot + " #: " + testsRealized.size() );
 		for (UnitTest test : testsRealized) {
@@ -34,5 +51,6 @@ public class TestLog {
 			System.out.println("	" + message);
 		}
 		System.out.println("");
+		System.setOut(console);
 	}	
 }
