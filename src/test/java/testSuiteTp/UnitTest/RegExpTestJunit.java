@@ -1,8 +1,13 @@
 package testSuiteTp.UnitTest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import testSuiteTp.TestInterface.ResultEnum;
 import testSuiteTp.TestInterface.TestSuite;
 import testSuiteTp.TestInterface.UnitTest;
 
@@ -33,6 +38,10 @@ public class RegExpTestJunit {
 	@Test
 	public void Test1(){	
 		ts.run(".*HOLA.*");
+		assertFalse(testa.hasPassed());
+		assertEquals( testb.hasPassed() , true );
+		assertEquals( testc.getResult() , ResultEnum.NOTTESTED );
+		assertEquals( testd.getResult() , ResultEnum.NOTTESTED );
 	}
 
 }
