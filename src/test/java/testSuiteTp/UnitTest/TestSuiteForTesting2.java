@@ -5,7 +5,7 @@ import testSuiteTp.TestInterface.TestSuite;
 
 public class TestSuiteForTesting2 extends TestSuite {
 
-	TestSuiteForTesting2(String testSuiteName) {
+	public TestSuiteForTesting2(String testSuiteName) {
 		super(testSuiteName);
 	}
 	
