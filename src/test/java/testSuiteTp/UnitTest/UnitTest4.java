@@ -6,9 +6,9 @@ import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 import testSuiteTp.exceptions.ContextElementDoesNotExist;
 
-public class UnitTestForTesting4 extends UnitTest {
+public class UnitTest4 extends UnitTest {
 
-	protected UnitTestForTesting4(String testName) {
+	protected UnitTest4(String testName) {
 		super(testName);
 	}
 

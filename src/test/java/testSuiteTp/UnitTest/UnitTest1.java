@@ -3,9 +3,9 @@ package testSuiteTp.UnitTest;
 import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 
-public class UnitTestForTesting1 extends UnitTest{
+public class UnitTest1 extends UnitTest{
 
-	public UnitTestForTesting1(String testName) {
+	public UnitTest1(String testName) {
 		super(testName);
 	}
 	

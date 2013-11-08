@@ -3,15 +3,10 @@ package testSuiteTp.UnitTest;
 import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.UnitTest;
 
-public class UnitTestForTesting2 extends UnitTest{
+public class UnitTest2 extends UnitTest{
 
-	public UnitTestForTesting2(String testName) {
+	public UnitTest2(String testName) {
 		super(testName);
-	}
-	
-	@Override
-	public void setUp(Context context){
-		
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public abstract class TestSuite extends TestComponent {
 	 */
 	protected abstract void configureTests();
 
-	protected TestSuite(String testSuiteName) {
+	public TestSuite(String testSuiteName) {
 		this.testName = testSuiteName;
 		this.testLog = new TestLog(testSuiteName);
 	}
@@ -52,11 +52,11 @@ public abstract class TestSuite extends TestComponent {
 	 * Agrega un Componente de Test a la Suite actual
 	 */
 
-	public void add(TestSuite testSuite) {
+	final public void add(TestSuite testSuite) {
 		this.addToList(testSuite,this.activeTestSuites );
 	}
 
-	public void add(UnitTest unitTest) {
+	final public void add(UnitTest unitTest) {
 		this.addToList(unitTest,this.activeUnitTests);
 	}
 	
