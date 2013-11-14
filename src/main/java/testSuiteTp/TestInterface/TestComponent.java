@@ -27,20 +27,20 @@ public abstract class TestComponent extends Taggeable implements XmlRepresentabl
 		this.run(parentContext, REG_EXP_NULL );
 	}
 	
-	final public void run(Criteria<TestComponent> cTc) {
+	final public void run(Criteria<UnitTest> cTc) {
 		Context emptyContext = new Context();
-		this.run(emptyContext, REG_EXP_NULL );
+		this.run(emptyContext, cTc );
 	}
 	
-	final public void run(Context parentContext,Criteria<TestComponent> ctc){
+	final public void run(Context parentContext,Criteria<UnitTest> ctc){
 		this.run(parentContext,REG_EXP_NULL,ctc);
 	}
 	
 	final public void run(Context parentContext, String regExp ){
-		this.run(parentContext, regExp, new NullCriteria() );
+		this.run(parentContext, regExp, new NullCriteria<UnitTest>() );
 	}
 	
-	abstract public void run (Context parentContext, String regExp, Criteria<TestComponent> criteria);
+	abstract public void run(Context parentContext, String regExp, Criteria<UnitTest> criteria);
 	
 	abstract public String getXpathNavigatorRepresentation();
 	

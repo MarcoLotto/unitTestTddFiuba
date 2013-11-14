@@ -1,11 +1,10 @@
 package criteriaFiltering;
 
-import testSuiteTp.TestInterface.TestComponent;
 
-public class NullCriteria extends Criteria<TestComponent> {
+public class NullCriteria<T> extends Criteria<T> {
 
 	@Override
-	public boolean IsSatisfiedBy(TestComponent candidate) {
+	public boolean IsSatisfiedBy(T candidate) {
 		return true;
 	}
 

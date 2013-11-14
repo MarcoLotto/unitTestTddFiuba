@@ -3,9 +3,6 @@ package testSuiteTp.TestInterface;
 
 import criteriaFiltering.Criteria;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import testSuiteTp.exceptions.AssertException;
@@ -14,6 +11,7 @@ import testSuiteTp.exceptions.EqualsAssertException;
 public abstract class UnitTest extends TestComponent {
 
 	private UnitTestState state = new UnitTestState();
+	private int runTime;
 
 	public UnitTest(String testName) {
 		this.testName = testName;
@@ -23,11 +21,15 @@ public abstract class UnitTest extends TestComponent {
 	 * Este es el metodo con el que se corre el test
 	 */
 	@Override
-	public void run(Context parentContext, String regExp,Criteria<TestComponent> criteria) {
-		if (this.getName().matches(regExp)){
+	public void run(Context parentContext, String regExp,Criteria<UnitTest> criteria) {
+		boolean regexp = this.getName().matches(regExp);
+		boolean crit = criteria.IsSatisfiedBy(this);
+		if ( regexp && crit ){
+			    
 			this.mergeWithParentContext(parentContext);
 			this.setUp(this.context);
 			try {
+				this.beginTimeTest();
 				this.runThis();
 				state.setAsPassed();
 			} 
@@ -37,7 +39,22 @@ public abstract class UnitTest extends TestComponent {
 			catch (Exception e) {
 				state.setAsError(e);
 			}
+			finally{
+				this.endTimeTest();
+			}
 		}
+	}
+
+	private void endTimeTest() {
+		this.runTime = this.getCurrentTimeInMilliseconds() - this.runTime;		
+	}
+
+	private void beginTimeTest() {
+		this.runTime = this.getCurrentTimeInMilliseconds();
+	}
+	
+	private int getCurrentTimeInMilliseconds(){
+		return (int) Calendar.getInstance().getTimeInMillis();
 	}
 
 	/**
@@ -77,26 +94,29 @@ public abstract class UnitTest extends TestComponent {
 		return state.getMessage();
 	}
 	
-	
+	public int getRunTime() {
+		return runTime;
+	}
+
 	public String getXpathNavigatorRepresentation(){
 		String newLine = System.getProperty("line.separator");
 		
 		String representation = "";
-		representation += "<testcase>" + newLine;
+		representation += "<testcase" + " name=\""+ this.getName() + "\" status=\""+ this.getResult() 
+				+ "\">" + newLine;
+		
 		if(this.state.getResult() == ResultEnum.ERROR){
 			representation += "<error>" + newLine;
-			//representation += "<type>failure error</type>" + newLine;
 			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
 			representation += "</error>" + newLine;			
 		}
 		else if(this.state.getResult() == ResultEnum.FAIL){
 			representation += "<failure>" + newLine;
-			//representation += "<type>failure error</type>" + newLine;
 			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
 			representation += "</failure>" + newLine;			
 		}
-		representation += "<name>" + this.getName() + "</name>" + newLine;
-		representation += "<status>" + this.getResult() + "</status>" + newLine;
+		representation += "<system-out>" + this.getMessage() + "</system-out>";
+		
 		
 		representation += "</testcase>" + newLine;
 		return representation;

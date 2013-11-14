@@ -46,8 +46,8 @@ public class ChainedNamesTest {
 		assertEquals( ut1.getResult() , ResultEnum.OK );
 		assertEquals ( ut2.getResult() , ResultEnum.OK );
 		
-		assertEquals ( ts6.getPath()+ts6.getName() , "A.B.C.D.E2" );
-		assertEquals ( ts5.getPath()+ts5.getName() , "A.B.C.D.E1" );
+		assertEquals ( ts6.getPath() , "A.B.C.D.E2" );
+		assertEquals ( ts5.getPath() , "A.B.C.D.E1" );
 	}
 
 }

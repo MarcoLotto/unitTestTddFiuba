@@ -1,9 +1,9 @@
 package tags;
 
 import criteriaFiltering.Criteria;
-import testSuiteTp.TestInterface.TestComponent;
+import testSuiteTp.TestInterface.UnitTest;
 
-public class RegExpOp extends Criteria<TestComponent> {
+public class RegExpOp extends Criteria<UnitTest> {
 	
 	String regExp;
 	
@@ -12,8 +12,8 @@ public class RegExpOp extends Criteria<TestComponent> {
 	}
 
 	@Override
-	public boolean IsSatisfiedBy(TestComponent candidate) {
-		boolean ret = candidate.getName().matches( this.regExp ) ;
+	public boolean IsSatisfiedBy(UnitTest candidate) {
+		boolean ret = (candidate.getName()).matches( this.regExp ) ;
 		return ret ;
 	}
 
