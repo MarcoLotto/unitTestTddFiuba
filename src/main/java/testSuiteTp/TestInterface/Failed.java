@@ -7,12 +7,10 @@ public class Failed implements State {
 		this.exception = exception;
 	}
 
-	@Override
 	public String getMessage() {
 		return this.exception.getMessage();
 	}
 
-	@Override
 	public ResultEnum getResult() {
 		return ResultEnum.FAIL;
 	}

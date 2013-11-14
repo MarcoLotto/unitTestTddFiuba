@@ -5,7 +5,7 @@ import testSuiteTp.exceptions.ContextElementDoesNotExist;
 
 public class UnitTest4 extends UnitTest {
 
-	protected UnitTest4(String testName) {
+	public UnitTest4(String testName) {
 		super(testName);
 	}
 

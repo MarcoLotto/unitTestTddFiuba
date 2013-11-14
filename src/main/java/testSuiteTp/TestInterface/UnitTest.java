@@ -97,4 +97,5 @@ public abstract class UnitTest extends TestComponent {
 		representation += "</testcase>" + newLine;
 		return representation;
 	}
-}
+
+	}
