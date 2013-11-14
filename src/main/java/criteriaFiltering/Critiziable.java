@@ -6,5 +6,4 @@ public interface Critiziable<T> {
     Critiziable<T> And(Critiziable<T> other);
     Critiziable<T> Or(Critiziable<T> other);
     Critiziable<T> Not();
-
 }

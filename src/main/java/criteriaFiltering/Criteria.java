@@ -8,7 +8,7 @@ public abstract class Criteria<T> implements Critiziable<T> {
 		return new AndOp<T>( this , other );
 	}
 	
-	// This must be overridden by the Client that wants to create a criteria to use as filter !
+	// Cada criterio debe sobreescribir esto
 	@Override
 	public abstract boolean IsSatisfiedBy(T candidate);
 

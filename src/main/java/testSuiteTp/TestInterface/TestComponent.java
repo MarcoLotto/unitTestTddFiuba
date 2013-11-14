@@ -24,8 +24,16 @@ public abstract class TestComponent extends Taggeable implements XmlRepresentabl
 	}
 	
 	final public void run(Context parentContext) {
+		this.run(parentContext, REG_EXP_NULL );
+	}
+	
+	final public void run(Criteria<TestComponent> cTc) {
 		Context emptyContext = new Context();
 		this.run(emptyContext, REG_EXP_NULL );
+	}
+	
+	final public void run(Context parentContext,Criteria<TestComponent> ctc){
+		this.run(parentContext,REG_EXP_NULL,ctc);
 	}
 	
 	final public void run(Context parentContext, String regExp ){

@@ -1,17 +1,16 @@
 package tags;
 
 import junit.framework.TestCase;
-import testSuiteTp.TestInterface.TestComponent;
 import criteriaFiltering.Criteria;
 
-public class RegExpTestCase extends Criteria<TestComponent>{
+public class RegExpTestCase extends Criteria<TestCase>{
 	String regExp;
 	
 	public RegExpTestCase(String regExp1){
 		this.regExp = regExp1;
 	}
 	@Override
-	public boolean IsSatisfiedBy(TestComponent candidate) {
+	public boolean IsSatisfiedBy(TestCase candidate) {
 		boolean ret = candidate.getName().matches(this.regExp) ;
 		return ret;
 	}

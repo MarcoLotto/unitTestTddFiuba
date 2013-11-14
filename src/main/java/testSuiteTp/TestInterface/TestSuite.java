@@ -46,7 +46,7 @@ public abstract class TestSuite extends TestComponent {
 		this.testLog.logSuiteClose(this.getPath());
 		
 		for (TestComponent testSuite : this.activeTestSuites) {
-			testSuite.run(this.context, regExp);
+			testSuite.run(this.context, regExp,criteria);
 		}
 		this.testLog.closeEdition(this);
 		
