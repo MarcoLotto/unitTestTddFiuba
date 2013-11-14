@@ -16,6 +16,10 @@ public class UnitTestState {
 		this.state = new Failed(exception);
 	}
 	
+	public void setAsError(Exception exception) {
+		this.state = new Error(exception);
+	}
+	
 	public String getMessage(){
 		return this.state.getMessage();		
 	}

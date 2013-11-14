@@ -26,8 +26,12 @@ public abstract class UnitTest extends TestComponent {
 			try {
 				this.runThis();
 				state.setAsPassed();
-			} catch (Exception e) {
+			} 
+			catch (AssertException e) {
 				state.setAsFailed(e);
+			}
+			catch (Exception e) {
+				state.setAsError(e);
 			}
 		}
 	}
@@ -76,10 +80,17 @@ public abstract class UnitTest extends TestComponent {
 		String representation = "";
 		representation += "<testcase>" + newLine;
 		if(this.state.getResult() == ResultEnum.ERROR){
-			representation += "<name>" + this.getName() + "</name>" + newLine;
-			
+			representation += "<error>" + newLine;
+			representation += "<type>failure error</type>" + newLine;
+			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
+			representation += "</error>" + newLine;			
 		}
-		
+		else if(this.state.getResult() == ResultEnum.FAIL){
+			representation += "<failure>" + newLine;
+			representation += "<type>failure error</type>" + newLine;
+			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
+			representation += "</failure>" + newLine;			
+		}
 		representation += "<name>" + this.getName() + "</name>" + newLine;
 		representation += "<status>" + this.getResult() + "</status>" + newLine;
 		
