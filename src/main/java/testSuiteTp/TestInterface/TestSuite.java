@@ -11,6 +11,7 @@ import criteriaFiltering.Criteria;
 
 import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
+import testSuiteTp.logguer.TestLogXml;
 import testSuiteTp.logguer.ToScreenTestLog;
 
 public abstract class TestSuite extends TestComponent {
@@ -112,11 +113,15 @@ public abstract class TestSuite extends TestComponent {
 		this.testLog = testLog;
 	}
 
+	@Override
 	public String getXpathNavigatorRepresentation(){
 		String newLine = System.getProperty("line.separator");
 		String representation = "";
-		representation += "<testsuite>" + newLine;
-		int testCount = 0, failureCount = 0, errorCount = 0;
+		representation += "<testsuite name=\"" + this.getName() + "\" tests=\"" + this.getTestCount()
+				+ "\" failures=\""+ this.getCountByState(ResultEnum.FAIL) + "\" errors=\""
+				+ this.getCountByState(ResultEnum.ERROR) + "\" timestamp=\"" 
+				+ this.getTimeStamp() + "\" hostname=\"" + this.getHostName()
+				+ "\">" + newLine;
 		
 		if(this.activeTestSuites.size() > 0){
 			representation += "<testsuites>" + newLine;
@@ -134,12 +139,6 @@ public abstract class TestSuite extends TestComponent {
 			representation += "</testcases>" + newLine;
 		}
 		
-		representation += "<name>" + this.getName() + "</name>" + newLine;
-		representation += "<tests>" + this.getTestCount() + "</tests>" + newLine;
-		representation += "<failures>" + this.getCountByState(ResultEnum.FAIL) + "</failures>" + newLine;
-		representation += "<errors>" + this.getCountByState(ResultEnum.ERROR) + "</errors>" + newLine;
-		representation += "<timestamp>" + this.getTimeStamp() + "</timestamp>" + newLine;
-		representation += "<hostname>" + this.getHostName() + "</hostName>" + newLine;
 		representation += "</testsuite>" + newLine;
 		return representation;
 	}

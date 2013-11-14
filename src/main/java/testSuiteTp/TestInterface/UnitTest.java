@@ -82,21 +82,21 @@ public abstract class UnitTest extends TestComponent {
 		String newLine = System.getProperty("line.separator");
 		
 		String representation = "";
-		representation += "<testcase>" + newLine;
+		representation += "<testcase" + " name=\""+ this.getName() + "\" status=\""+ this.getResult() 
+				+ "\">" + newLine;
+		
 		if(this.state.getResult() == ResultEnum.ERROR){
 			representation += "<error>" + newLine;
-			//representation += "<type>failure error</type>" + newLine;
 			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
 			representation += "</error>" + newLine;			
 		}
 		else if(this.state.getResult() == ResultEnum.FAIL){
 			representation += "<failure>" + newLine;
-			//representation += "<type>failure error</type>" + newLine;
 			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
 			representation += "</failure>" + newLine;			
 		}
-		representation += "<name>" + this.getName() + "</name>" + newLine;
-		representation += "<status>" + this.getResult() + "</status>" + newLine;
+		representation += "<system-out>" + this.getMessage() + "</system-out>";
+		
 		
 		representation += "</testcase>" + newLine;
 		return representation;
