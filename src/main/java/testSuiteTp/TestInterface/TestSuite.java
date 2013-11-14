@@ -1,6 +1,10 @@
 package testSuiteTp.TestInterface;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import testSuiteTp.exceptions.TestError;
@@ -94,5 +98,47 @@ public abstract class TestSuite extends TestComponent {
 	public String getPath(){
 		return this.pathFromRoot;
 	}
+	
+	public String getXpathNavigatorRepresentation(){
+		String newLine = System.getProperty("line.separator");
+		String representation = "";
+		representation += "<testsuite>" + newLine;
+		
+		if(this.activeTestSuites.size() > 0){
+			representation += "<testsuites>" + newLine;
+			for (TestSuite testSuite : this.activeTestSuites) {
+				representation += testSuite.getXpathNavigatorRepresentation();			
+			}
+			representation += "</testsuites>" + newLine;
+		}
+		
+		if(this.activeUnitTests.size() > 0){
+			representation += "<testcases>" + newLine;
+			for (UnitTest unitTest : this.activeUnitTests) {
+				representation += unitTest.getXpathNavigatorRepresentation();			
+			}
+			representation += "</testcases>" + newLine;
+		}
+		
+		representation += "<name>" + this.getName() + "</name>" + newLine;
+		representation += "<timestamp>" + this.getTimeStamp() + "</timestamp>" + newLine;
+		representation += "<hostname>" + this.getHostName() + "</hostName>" + newLine;
+		representation += "</testsuite>" + newLine;
+		return representation;
+	}
+	
+	
+	private String getTimeStamp() {
+		return new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+	}
+
+	private String getHostName() {
+		try {
+			return InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e) {
+			return "";
+		}
+	}
+
 
 }

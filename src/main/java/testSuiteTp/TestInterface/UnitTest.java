@@ -1,5 +1,10 @@
 package testSuiteTp.TestInterface;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import testSuiteTp.exceptions.AssertException;
 import testSuiteTp.exceptions.EqualsAssertException;
 
@@ -63,4 +68,23 @@ public abstract class UnitTest extends TestComponent {
 	public String getMessage() {
 		return state.getMessage();
 	}
-}
+	
+	
+	public String getXpathNavigatorRepresentation(){
+		String newLine = System.getProperty("line.separator");
+		
+		String representation = "";
+		representation += "<testcase>" + newLine;
+		if(this.state.getResult() == ResultEnum.ERROR){
+			representation += "<name>" + this.getName() + "</name>" + newLine;
+			
+		}
+		
+		representation += "<name>" + this.getName() + "</name>" + newLine;
+		representation += "<status>" + this.getResult() + "</status>" + newLine;
+		
+		representation += "</testcase>" + newLine;
+		return representation;
+	}
+
+	}

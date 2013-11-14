@@ -1,6 +1,6 @@
 package testSuiteTp.TestInterface;
 
-public abstract class TestComponent {
+public abstract class TestComponent implements XmlRepresentable {
 	
 	private static final String REG_EXP_NULL = ".*" ;
 	
@@ -24,6 +24,8 @@ public abstract class TestComponent {
 	}
 	
 	abstract public void run(Context parentContext, String regExp );
+	
+	abstract public String getXpathNavigatorRepresentation();
 	
 	public void setUp(Context context){};
 	
