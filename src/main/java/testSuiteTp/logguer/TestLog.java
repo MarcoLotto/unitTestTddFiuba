@@ -23,7 +23,8 @@ public abstract class TestLog {
 	private int totalTests;
 	protected String pathFromRoot;
 	protected TestSuite owner;
-	
+	protected int testSuiteTotalRunTime;
+		
 	public void setPath(String path){
 		this.pathFromRoot = path;
 	}
@@ -37,13 +38,15 @@ public abstract class TestLog {
 	 * Imprime el ultimo test realizado
 	 */
 	public void logResult(UnitTest test) {
-		String message = "		[" + test.getResult()+"] "+ test.getName() + ": " + test.getMessage();
+		int displayRunTime = test.getRunTime() + 1;
+		String message = "		[" + test.getResult()+"] "+ test.getName() + ": " + test.getMessage() + " in " + displayRunTime + " milliseconds";
 		this.showMessage(message  + "\n");
 			
 		if(test.hasPassed()){
 			this.passedCount++;
 		}
-			this.totalTests++;			
+			this.totalTests++;	
+			this.testSuiteTotalRunTime += displayRunTime;
 	}			
 
 	/**
@@ -55,6 +58,7 @@ public abstract class TestLog {
 		if(testSuite.equals(owner)){
 			this.processOpenEdition();	
 		}		
+		this.testSuiteTotalRunTime = 0;
 	}
 
 	/**
@@ -78,7 +82,8 @@ public abstract class TestLog {
 	protected abstract void processCloseEdition();
 	
 	private String getCloseMessage(String suiteName) {
-		return suiteName + " finalized - Passed tests: " + this.passedCount + "/" + this.totalTests + "\n";
+		return suiteName + " finalized - Passed tests: " + this.passedCount + "/" + this.totalTests
+				+ " in " + this.testSuiteTotalRunTime + " milliseconds\n";
 	}
 	
 	private String getHeaderMessage(String testSuiteName) {

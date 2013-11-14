@@ -5,13 +5,12 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.List; 
 
 import criteriaFiltering.Criteria;
 
 import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
-import testSuiteTp.logguer.TestLogXml;
 import testSuiteTp.logguer.ToScreenTestLog;
 
 public abstract class TestSuite extends TestComponent {

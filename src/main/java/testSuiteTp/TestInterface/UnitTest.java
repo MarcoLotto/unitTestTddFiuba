@@ -14,6 +14,7 @@ import testSuiteTp.exceptions.EqualsAssertException;
 public abstract class UnitTest extends TestComponent {
 
 	private UnitTestState state = new UnitTestState();
+	private int runTime;
 
 	public UnitTest(String testName) {
 		this.testName = testName;
@@ -28,6 +29,7 @@ public abstract class UnitTest extends TestComponent {
 			this.mergeWithParentContext(parentContext);
 			this.setUp(this.context);
 			try {
+				this.beginTimeTest();
 				this.runThis();
 				state.setAsPassed();
 			} 
@@ -37,7 +39,22 @@ public abstract class UnitTest extends TestComponent {
 			catch (Exception e) {
 				state.setAsError(e);
 			}
+			finally{
+				this.endTimeTest();
+			}
 		}
+	}
+
+	private void endTimeTest() {
+		this.runTime = this.getCurrentTimeInMilliseconds() - this.runTime;		
+	}
+
+	private void beginTimeTest() {
+		this.runTime = this.getCurrentTimeInMilliseconds();
+	}
+	
+	private int getCurrentTimeInMilliseconds(){
+		return (int) Calendar.getInstance().getTimeInMillis();
 	}
 
 	/**
@@ -77,7 +94,10 @@ public abstract class UnitTest extends TestComponent {
 		return state.getMessage();
 	}
 	
-	
+	public int getRunTime() {
+		return runTime;
+	}
+
 	public String getXpathNavigatorRepresentation(){
 		String newLine = System.getProperty("line.separator");
 		
