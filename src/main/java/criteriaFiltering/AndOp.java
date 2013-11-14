@@ -1,4 +1,4 @@
-package tags;
+package criteriaFiltering;
 
 
 public class AndOp<Y> extends Criteria<Y> {

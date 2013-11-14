@@ -1,4 +1,4 @@
-package tags;
+package criteriaFiltering;
 
 
 public abstract class Criteria<T> implements Critiziable<T> {

@@ -1,6 +1,7 @@
 package testSuiteTp.TestInterface;
 
-public abstract class TestComponent {
+
+public abstract class TestComponent extends Taggeable {
 	
 	private static final String REG_EXP_NULL = ".*" ;
 	

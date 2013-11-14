@@ -1,4 +1,4 @@
-package tags;
+package criteriaFiltering;
 
 public interface Critiziable <T> {
 	

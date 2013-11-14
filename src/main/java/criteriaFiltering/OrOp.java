@@ -1,4 +1,4 @@
-package tags;
+package criteriaFiltering;
 
 
 public class OrOp<T> extends Criteria<T> {

@@ -1,4 +1,4 @@
-package tags;
+package criteriaFiltering;
 
 
 public class NotOp<T> extends Criteria<T>{
