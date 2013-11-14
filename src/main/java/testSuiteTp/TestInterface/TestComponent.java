@@ -1,5 +1,9 @@
 package testSuiteTp.TestInterface;
 
+import tags.Taggeable;
+import criteriaFiltering.Criteria;
+import criteriaFiltering.NullCriteria;
+
 
 public abstract class TestComponent extends Taggeable {
 	
@@ -9,28 +13,32 @@ public abstract class TestComponent extends Taggeable {
 	protected TestSuite ParentTest;
 	String testName;
 
-	public void run() {
+	final public void run() {
 		Context emptyContext = new Context();
 		this.run(emptyContext, REG_EXP_NULL);
 	}
 	
-	public void run(String regExp) {
+	final public void run(String regExp) {
 		Context emptyContext = new Context();
 		this.run(emptyContext, regExp );
 	}
 	
-	public void run(Context parentContext) {
+	final public void run(Context parentContext) {
 		Context emptyContext = new Context();
 		this.run(emptyContext, REG_EXP_NULL );
 	}
 	
-	abstract public void run(Context parentContext, String regExp );
+	final public void run(Context parentContext, String regExp ){
+		this.run(parentContext, regExp, new NullCriteria() );
+	}
+	
+	abstract public void run (Context parentContext, String regExp, Criteria<TestComponent> criteria);
 	
 	public void setUp(Context context){};
 	
 	public void tearDown(Context context){};
 	
-	public String getName() {
+	final public String getName() {
 		return this.testName;
 	}
 	
@@ -49,7 +57,7 @@ public abstract class TestComponent extends Taggeable {
 		this.context.merge(parentContext);		
 	}
 
-	public Context getContext() {
+	final public Context getContext() {
 		return this.context;
 	}
 	

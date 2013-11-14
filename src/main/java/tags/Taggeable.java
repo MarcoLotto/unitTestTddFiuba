@@ -1,4 +1,4 @@
-package testSuiteTp.TestInterface;
+package tags;
 
 import java.util.HashSet;
 import java.util.Set;

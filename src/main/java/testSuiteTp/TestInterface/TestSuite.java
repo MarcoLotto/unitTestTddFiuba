@@ -3,6 +3,8 @@ package testSuiteTp.TestInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+import criteriaFiltering.Criteria;
+
 import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
 
@@ -23,13 +25,14 @@ public abstract class TestSuite extends TestComponent {
 		this.testLog = new TestLog();
 	}
 
-	final public void run(Context parentContext, String regExp) {
+	final public void run(Context parentContext, String regExp,Criteria<TestComponent> criteria) {
 		this.prepareContext(parentContext);
 		this.configureTests();
 		this.setUp(this.context);
 		this.testLog.setPath( this.pathFromRoot + this.getName() );
+		
 		for (TestComponent test : this.activeUnitTests) {
-			test.run(this.context, regExp);
+			test.run(this.context, regExp,criteria);
 		}
 		testLog.processResults(this.activeUnitTests);
 		testLog.showResults();

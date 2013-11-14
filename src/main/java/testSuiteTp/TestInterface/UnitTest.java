@@ -1,5 +1,6 @@
 package testSuiteTp.TestInterface;
 
+import criteriaFiltering.Criteria;
 import testSuiteTp.exceptions.AssertException;
 import testSuiteTp.exceptions.EqualsAssertException;
 
@@ -14,7 +15,7 @@ public abstract class UnitTest extends TestComponent {
 	/**
 	 * Este es el metodo con el que se corre el test
 	 */
-	public void run(Context parentContext, String regExp) {
+	public void run(Context parentContext, String regExp,Criteria<TestComponent> criteria) {
 		if (this.getName().matches(regExp)){
 			this.mergeWithParentContext(parentContext);
 			this.setUp(this.context);
