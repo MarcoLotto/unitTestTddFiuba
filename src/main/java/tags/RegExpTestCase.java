@@ -12,7 +12,7 @@ public class RegExpTestCase extends Criteria<TestComponent>{
 	}
 	@Override
 	public boolean IsSatisfiedBy(TestComponent candidate) {
-		boolean ret = candidate. ;
+		boolean ret = candidate.getName().matches(this.regExp) ;
 		return ret;
 	}
 

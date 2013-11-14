@@ -1,45 +1,56 @@
 package testSuiteTp.TestInterface;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import criteriaFiltering.Criteria;
 
 import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
+import testSuiteTp.logguer.ToScreenTestLog;
 
 public abstract class TestSuite extends TestComponent {
 
 	private List<UnitTest> activeUnitTests = new ArrayList<UnitTest>();
 	private List<TestSuite> activeTestSuites = new ArrayList<TestSuite>();
 	private TestLog testLog;
-	private String pathFromRoot ="";
+	private String rootPath;
 
 	/**
 	 * Se declaran todos los tests que componen la suite
 	 */
 	protected abstract void configureTests();
 
-	public TestSuite(String testSuiteName) {
+	public TestSuite(String testSuiteName, TestLog testLogImplementation) {
 		this.testName = testSuiteName;
-		this.testLog = new TestLog();
+		this.rootPath = testSuiteName;
+		this.testLog = testLogImplementation;
+		this.testLog.setOwner(this);
+		this.testLog.setPath( testSuiteName );
 	}
-
+	
 	final public void run(Context parentContext, String regExp,Criteria<TestComponent> criteria) {
 		this.prepareContext(parentContext);
 		this.configureTests();
 		this.setUp(this.context);
-		this.testLog.setPath( this.pathFromRoot + this.getName() );
 		
-		for (TestComponent test : this.activeUnitTests) {
+		this.testLog.openEdition(this);
+		this.testLog.logSuiteHeader(this.getPath());
+		for (UnitTest test : this.activeUnitTests) {
 			test.run(this.context, regExp,criteria);
+			this.testLog.logResult(test);
 		}
-		testLog.processResults(this.activeUnitTests);
-		testLog.showResults();
+		this.testLog.logSuiteClose(this.getPath());
 		
 		for (TestComponent testSuite : this.activeTestSuites) {
 			testSuite.run(this.context, regExp);
 		}
+		this.testLog.closeEdition(this);
+		
 	}
 
 	/**
@@ -56,15 +67,10 @@ public abstract class TestSuite extends TestComponent {
 	/**
 	 * Agrega un Componente de Test a la Suite actual
 	 */
-
 	final public void add(TestSuite testSuite) {
 		this.addToList(testSuite,this.activeTestSuites );
-		if ( this.ParentTest != null){
-			testSuite.setPath( this.pathFromRoot + this.getName() + "." );
-		}
-		else{
-			testSuite.setPath( this.getName() + "." );				
-		}
+		testSuite.setPath( this.getPath() );
+		testSuite.setTestLog(this.getTestLog());
 	}
 
 	final public void add(UnitTest unitTest) {
@@ -91,11 +97,89 @@ public abstract class TestSuite extends TestComponent {
 		}
 	}
 	
-	private void setPath(String path){
-		this.pathFromRoot = path;		
+	private void setPath(String parentPath){
+		this.rootPath = parentPath + "." + this.getName();		
 	}
 	public String getPath(){
-		return this.pathFromRoot;
+		return this.rootPath;
 	}
+		
+	public TestLog getTestLog() {
+		return testLog;
+	}
+
+	public void setTestLog(TestLog testLog) {
+		this.testLog = testLog;
+	}
+
+	public String getXpathNavigatorRepresentation(){
+		String newLine = System.getProperty("line.separator");
+		String representation = "";
+		representation += "<testsuite>" + newLine;
+		int testCount = 0, failureCount = 0, errorCount = 0;
+		
+		if(this.activeTestSuites.size() > 0){
+			representation += "<testsuites>" + newLine;
+			for (TestSuite testSuite : this.activeTestSuites) {
+				representation += testSuite.getXpathNavigatorRepresentation();			
+			}
+			representation += "</testsuites>" + newLine;
+		}
+		
+		if(this.activeUnitTests.size() > 0){
+			representation += "<testcases>" + newLine;
+			for (UnitTest unitTest : this.activeUnitTests) {
+				representation += unitTest.getXpathNavigatorRepresentation();			
+			}
+			representation += "</testcases>" + newLine;
+		}
+		
+		representation += "<name>" + this.getName() + "</name>" + newLine;
+		representation += "<tests>" + this.getTestCount() + "</tests>" + newLine;
+		representation += "<failures>" + this.getCountByState(ResultEnum.FAIL) + "</failures>" + newLine;
+		representation += "<errors>" + this.getCountByState(ResultEnum.ERROR) + "</errors>" + newLine;
+		representation += "<timestamp>" + this.getTimeStamp() + "</timestamp>" + newLine;
+		representation += "<hostname>" + this.getHostName() + "</hostName>" + newLine;
+		representation += "</testsuite>" + newLine;
+		return representation;
+	}
+	
+	private int getCountByState(ResultEnum state)
+	{
+		int count = 0;
+		for (TestSuite testSuite : this.activeTestSuites) {
+			count += testSuite.getCountByState(state);
+		}
+		
+		for (UnitTest unitTest : this.activeUnitTests) {
+			if(unitTest.getResult() == state)
+				count++;
+		}
+		
+		return count ;
+	}
+	
+	private int getTestCount(){
+		int count = 0;
+		for (TestSuite testSuite : this.activeTestSuites) {
+			count += testSuite.getTestCount();
+		}
+		count += this.activeUnitTests.size();
+		
+		return count;
+	}
+	
+	private String getTimeStamp() {
+		return new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+	}
+
+	private String getHostName() {
+		try {
+			return InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e) {
+			return "";
+		}
+	}
+
 
 }

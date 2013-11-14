@@ -1,9 +1,9 @@
 package testSuiteTp.TestInterface;
 
-public class Failed implements State {
+public class Error implements State {
 	private Exception exception;
 
-	public Failed(Exception exception) {
+	public Error(Exception exception) {
 		this.exception = exception;
 	}
 
@@ -12,7 +12,7 @@ public class Failed implements State {
 	}
 
 	public ResultEnum getResult() {
-		return ResultEnum.FAIL;
+		return ResultEnum.ERROR;
 	}
 
 }

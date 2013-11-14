@@ -5,7 +5,7 @@ import criteriaFiltering.Criteria;
 import criteriaFiltering.NullCriteria;
 
 
-public abstract class TestComponent extends Taggeable {
+public abstract class TestComponent extends Taggeable implements XmlRepresentable {
 	
 	private static final String REG_EXP_NULL = ".*" ;
 	
@@ -33,6 +33,8 @@ public abstract class TestComponent extends Taggeable {
 	}
 	
 	abstract public void run (Context parentContext, String regExp, Criteria<TestComponent> criteria);
+	
+	abstract public String getXpathNavigatorRepresentation();
 	
 	public void setUp(Context context){};
 	

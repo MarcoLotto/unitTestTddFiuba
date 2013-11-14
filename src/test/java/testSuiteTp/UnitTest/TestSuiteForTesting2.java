@@ -2,11 +2,12 @@ package testSuiteTp.UnitTest;
 
 import testSuiteTp.TestInterface.Context;
 import testSuiteTp.TestInterface.TestSuite;
+import testSuiteTp.logguer.ToScreenTestLog;
 
 public class TestSuiteForTesting2 extends TestSuite {
 
 	public TestSuiteForTesting2(String testSuiteName) {
-		super(testSuiteName);
+		super(testSuiteName, new ToScreenTestLog());
 	}
 	
 	@Override

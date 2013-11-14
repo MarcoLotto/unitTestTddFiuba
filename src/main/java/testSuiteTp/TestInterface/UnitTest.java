@@ -1,6 +1,13 @@
 package testSuiteTp.TestInterface;
 
+
 import criteriaFiltering.Criteria;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import testSuiteTp.exceptions.AssertException;
 import testSuiteTp.exceptions.EqualsAssertException;
 
@@ -15,6 +22,7 @@ public abstract class UnitTest extends TestComponent {
 	/**
 	 * Este es el metodo con el que se corre el test
 	 */
+	@Override
 	public void run(Context parentContext, String regExp,Criteria<TestComponent> criteria) {
 		if (this.getName().matches(regExp)){
 			this.mergeWithParentContext(parentContext);
@@ -22,8 +30,12 @@ public abstract class UnitTest extends TestComponent {
 			try {
 				this.runThis();
 				state.setAsPassed();
-			} catch (Exception e) {
+			} 
+			catch (AssertException e) {
 				state.setAsFailed(e);
+			}
+			catch (Exception e) {
+				state.setAsError(e);
 			}
 		}
 	}
@@ -64,4 +76,30 @@ public abstract class UnitTest extends TestComponent {
 	public String getMessage() {
 		return state.getMessage();
 	}
-}
+	
+	
+	public String getXpathNavigatorRepresentation(){
+		String newLine = System.getProperty("line.separator");
+		
+		String representation = "";
+		representation += "<testcase>" + newLine;
+		if(this.state.getResult() == ResultEnum.ERROR){
+			representation += "<error>" + newLine;
+			//representation += "<type>failure error</type>" + newLine;
+			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
+			representation += "</error>" + newLine;			
+		}
+		else if(this.state.getResult() == ResultEnum.FAIL){
+			representation += "<failure>" + newLine;
+			//representation += "<type>failure error</type>" + newLine;
+			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
+			representation += "</failure>" + newLine;			
+		}
+		representation += "<name>" + this.getName() + "</name>" + newLine;
+		representation += "<status>" + this.getResult() + "</status>" + newLine;
+		
+		representation += "</testcase>" + newLine;
+		return representation;
+	}
+
+	}
