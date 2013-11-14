@@ -11,7 +11,6 @@ import criteriaFiltering.Criteria;
 
 import testSuiteTp.exceptions.TestError;
 import testSuiteTp.logguer.TestLog;
-import testSuiteTp.logguer.ToScreenTestLog;
 
 public abstract class TestSuite extends TestComponent {
 
