@@ -81,13 +81,13 @@ public abstract class UnitTest extends TestComponent {
 		representation += "<testcase>" + newLine;
 		if(this.state.getResult() == ResultEnum.ERROR){
 			representation += "<error>" + newLine;
-			representation += "<type>failure error</type>" + newLine;
+			//representation += "<type>failure error</type>" + newLine;
 			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
 			representation += "</error>" + newLine;			
 		}
 		else if(this.state.getResult() == ResultEnum.FAIL){
 			representation += "<failure>" + newLine;
-			representation += "<type>failure error</type>" + newLine;
+			//representation += "<type>failure error</type>" + newLine;
 			representation += "<message>" + this.getMessage() + "</message>" + newLine;	
 			representation += "</failure>" + newLine;			
 		}
@@ -97,5 +97,4 @@ public abstract class UnitTest extends TestComponent {
 		representation += "</testcase>" + newLine;
 		return representation;
 	}
-
-	}
+}

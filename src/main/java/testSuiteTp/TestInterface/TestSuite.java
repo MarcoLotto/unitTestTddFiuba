@@ -103,6 +103,7 @@ public abstract class TestSuite extends TestComponent {
 		String newLine = System.getProperty("line.separator");
 		String representation = "";
 		representation += "<testsuite>" + newLine;
+		int testCount = 0, failureCount = 0, errorCount = 0;
 		
 		if(this.activeTestSuites.size() > 0){
 			representation += "<testsuites>" + newLine;
@@ -121,10 +122,38 @@ public abstract class TestSuite extends TestComponent {
 		}
 		
 		representation += "<name>" + this.getName() + "</name>" + newLine;
+		representation += "<tests>" + this.getTestCount() + "</tests>" + newLine;
+		representation += "<failures>" + this.getCountByState(ResultEnum.FAIL) + "</failures>" + newLine;
+		representation += "<errors>" + this.getCountByState(ResultEnum.ERROR) + "</errors>" + newLine;
 		representation += "<timestamp>" + this.getTimeStamp() + "</timestamp>" + newLine;
 		representation += "<hostname>" + this.getHostName() + "</hostName>" + newLine;
 		representation += "</testsuite>" + newLine;
 		return representation;
+	}
+	
+	private int getCountByState(ResultEnum state)
+	{
+		int count = 0;
+		for (TestSuite testSuite : this.activeTestSuites) {
+			count += testSuite.getCountByState(state);
+		}
+		
+		for (UnitTest unitTest : this.activeUnitTests) {
+			if(unitTest.getResult() == state)
+				count++;
+		}
+		
+		return count ;
+	}
+	
+	private int getTestCount(){
+		int count = 0;
+		for (TestSuite testSuite : this.activeTestSuites) {
+			count += testSuite.getTestCount();
+		}
+		count += this.activeUnitTests.size();
+		
+		return count;
 	}
 	
 	
