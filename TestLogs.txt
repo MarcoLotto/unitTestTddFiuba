@@ -1,0 +1,155 @@
+Tests for :TestSuiteTom #: 5
+	[NOTTESTED] xHxOLA: [Not Tested]
+	[OK] xxxHOLAxxx: Success
+	[FAIL] HOLAxxx: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[NOTTESTED] test4: [Not Tested]
+	[NOTTESTED] xxxxxxxchauxxxxx: [Not Tested]
+
+Tests for :TestSuiteTom.TestSuiteJunior #: 1
+	[OK] xHOLAxTestZ: Success
+
+Tests for :TestSuiteTom #: 5
+	[NOTTESTED] xHxOLA: [Not Tested]
+	[NOTTESTED] xxxHOLAxxx: [Not Tested]
+	[NOTTESTED] HOLAxxx: [Not Tested]
+	[NOTTESTED] test4: [Not Tested]
+	[OK] xxxxxxxchauxxxxx: Success
+
+Tests for :TestSuiteTom.TestSuiteJunior #: 1
+	[NOTTESTED] xHOLAxTestZ: [Not Tested]
+
+Tests for :TestSuiteTom #: 5
+	[OK] xHxOLA: Success
+	[OK] xxxHOLAxxx: Success
+	[FAIL] HOLAxxx: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[NOTTESTED] test4: [Not Tested]
+	[OK] xxxxxxxchauxxxxx: Success
+
+Tests for :TestSuiteTom.TestSuiteJunior #: 1
+	[OK] xHOLAxTestZ: Success
+
+Tests for :A #: 0
+
+Tests for :A.B #: 0
+
+Tests for :A.B.C #: 0
+
+Tests for :A.B.C.D #: 0
+
+Tests for :A.B.C.D.E1 #: 1
+	[OK] testCaseDeE1: Success
+
+Tests for :A.B.C.D.E2 #: 1
+	[OK] testCaseDeE2: Success
+
+Tests for :A #: 0
+
+Tests for :A.B #: 0
+
+Tests for :A.B.C #: 0
+
+Tests for :A.B.C.D #: 0
+
+Tests for :A.B.C.D.E1 #: 1
+	[OK] testCaseDeE1: Success
+
+Tests for :A.B.C.D.E2 #: 1
+	[OK] testCaseDeE2: Success
+
+Tests for :TestSuiteForTesting1 #: 4
+	[OK] test1: Success
+	[OK] test4: Success
+	[FAIL] test2: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[OK] test3: Success
+
+Tests for :TestSuiteForTesting1.TestSuiteForTesting2 (hijo de 1) #: 5
+	[OK] test1: Success
+	[OK] test6: Success
+	[OK] test5: Success
+	[FAIL] test2: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[OK] test3: Success
+
+Tests for :TestSuiteForTesting1 #: 4
+	[OK] test1: Success
+	[OK] test4: Success
+	[FAIL] test2: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[OK] test3: Success
+
+Tests for :TestSuiteForTesting1.TestSuiteForTesting2 (hijo de 1) #: 5
+	[OK] test1: Success
+	[OK] test6: Success
+	[OK] test5: Success
+	[FAIL] test2: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[OK] test3: Success
+
+Tests for :A #: 0
+
+Tests for :A.B #: 0
+
+Tests for :A.B.C #: 0
+
+Tests for :A.B.C.D #: 0
+
+Tests for :A.B.C.D.E1 #: 1
+	[OK] testCaseDeE1: Success
+
+Tests for :A.B.C.D.E2 #: 1
+	[OK] testCaseDeE2: Success
+
+Tests for :A #: 0
+
+Tests for :A.B #: 0
+
+Tests for :A.B.C #: 0
+
+Tests for :A.B.C.D #: 0
+
+Tests for :A.B.C.D.E1 #: 1
+	[OK] testCaseDeE1: Success
+
+Tests for :A.B.C.D.E2 #: 1
+	[OK] testCaseDeE2: Success
+
+Tests for :TestSuiteForTesting1 #: 4
+	[OK] test1: Success
+	[OK] test4: Success
+	[FAIL] test2: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[OK] test3: Success
+
+Tests for :TestSuiteForTesting1.TestSuiteForTesting2 (hijo de 1) #: 5
+	[OK] test1: Success
+	[OK] test6: Success
+	[OK] test5: Success
+	[FAIL] test2: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[OK] test3: Success
+
+Tests for :TestSuiteTom #: 5
+	[NOTTESTED] xHxOLA: [Not Tested]
+	[OK] xxxHOLAxxx: Success
+	[FAIL] HOLAxxx: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[NOTTESTED] test4: [Not Tested]
+	[NOTTESTED] xxxxxxxchauxxxxx: [Not Tested]
+
+Tests for :TestSuiteTom.TestSuiteJunior #: 1
+	[OK] xHOLAxTestZ: Success
+
+Tests for :TestSuiteTom #: 5
+	[NOTTESTED] xHxOLA: [Not Tested]
+	[NOTTESTED] xxxHOLAxxx: [Not Tested]
+	[NOTTESTED] HOLAxxx: [Not Tested]
+	[NOTTESTED] test4: [Not Tested]
+	[OK] xxxxxxxchauxxxxx: Success
+
+Tests for :TestSuiteTom.TestSuiteJunior #: 1
+	[NOTTESTED] xHOLAxTestZ: [Not Tested]
+
+Tests for :TestSuiteTom #: 5
+	[OK] xHxOLA: Success
+	[OK] xxxHOLAxxx: Success
+	[FAIL] HOLAxxx: Assert exception. Se esperaba <Chau> pero se obtuvo <Hola>
+	[NOTTESTED] test4: [Not Tested]
+	[OK] xxxxxxxchauxxxxx: Success
+
+Tests for :TestSuiteTom.TestSuiteJunior #: 1
+	[OK] xHOLAxTestZ: Success
+
