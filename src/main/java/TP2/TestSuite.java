@@ -19,6 +19,7 @@ public abstract class TestSuite implements Testeable {
 	private List<Test> tests;
 	private List<String> tagsToSearch;
 	protected List<String> testsToSkip;
+	private RunMode runMode;
 
 	public TestSuite() {
 		setName(name);
@@ -59,6 +60,10 @@ public abstract class TestSuite implements Testeable {
 
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
+	}
+	
+	public void setRunMode(RunMode runMode){
+		this.runMode = runMode;
 	}
 
 	protected abstract void init();
