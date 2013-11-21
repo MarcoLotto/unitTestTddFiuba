@@ -1,8 +1,10 @@
 package TP2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Tester Su responsabilidad es agregar los testeables para poder ejecutar los
@@ -12,9 +14,11 @@ import java.util.List;
 public class Tester {
 
 	private List<TestSuite> testSuites;
+	private Map<String, TestMemorySlot> recoveryTests = new HashMap<String, TestMemorySlot>();
 	TestMemorySlot lastRunnedTest;
 	private ReportMode reportMode;
 	private RunMode runMode;
+	private String recoveryEntry;
 
 	public Tester() {
 		testSuites = new LinkedList<TestSuite>();
@@ -48,6 +52,13 @@ public class Tester {
 		testSuites.add(testeable);
 	}
 
+	public void executeAndSaveRunInMemorySlot(String recoveryEntry){
+		this.execute();
+		TestMemorySlot memory = new TestMemorySlot();
+		memory.setRunnedTestSuites(this.testSuites);
+		this.recoveryTests.put(recoveryEntry, memory);
+	}
+	
 	/**
 	 * Ejecuta los test activos en el tester. Si se indica que el FailedAndNew mode
 	 * esta activo se correran ademas primero los tests que fallaron la corrida
@@ -61,10 +72,18 @@ public class Tester {
 		} else if (this.runMode.equals(RunMode.Standard)) {
 			this.executeAllTests(this.testSuites);
 		}
+		 else if (this.runMode.equals(RunMode.Recover)) {
+			 //Si no existe la clave para hacer el recovery, ejecuto la prueba actual
+			 if(!this.recoveryTests.containsKey(this.recoveryEntry)){
+				 this.executeAllTests(this.testSuites);
+			 }
+			 TestMemorySlot memory = this.recoveryTests.get(this.recoveryEntry);
+			 this.executeAllTests(memory.getRunnedTestSuites());
+		}
 
 		this.saveRunInMemory();
 		Reporter.getReporter().saveResults();
-	}
+	}	
 
 	private void executeAllTests(List<TestSuite> testsSuitesToRun) {
 		for (TestSuite t : testsSuitesToRun) {
@@ -98,4 +117,7 @@ public class Tester {
 		this.lastRunnedTest = memory;
 	}
 
+	public void setRecoveryEntry(String recoveryEntry) {
+		this.recoveryEntry = recoveryEntry;
+	}
 }
