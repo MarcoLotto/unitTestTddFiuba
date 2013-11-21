@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/** TestSuite 
- * Es lo que implementa el cliente para ejecutar una serie de tests.
+/**
+ * TestSuite Es lo que implementa el cliente para ejecutar una serie de tests.
  * Debe hacer que sus tests sean ejecutados dentro del metodo init().
  **/
 
@@ -61,8 +61,8 @@ public abstract class TestSuite implements Testeable {
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
-	
-	public void setRunMode(RunMode runMode){
+
+	public void setRunMode(RunMode runMode) {
 		this.runMode = runMode;
 	}
 
@@ -71,33 +71,33 @@ public abstract class TestSuite implements Testeable {
 	public void run() {
 		Reporter reporter = this.prepairTestSuites();
 		for (Test test : tests) {
-			this.runParticularTest(reporter, test);			
+			this.runParticularTest(reporter, test);
 		}
 		suiteTearDown();
 	}
-	
+
 	/**
 	 * Se corren solo los test que hayan fallado anteriormente
 	 */
-	public void runFailed(){
+	public void runFailed() {
 		Reporter reporter = this.prepairTestSuites();
 		for (Test test : tests) {
 			Result result = test.getResult();
-			if(result != null && (!result.getState().equals(ResultType.Ok))){
+			if (result != null && (!result.getState().equals(ResultType.Ok))) {
 				this.runParticularTest(reporter, test);
-			}			
+			}
 		}
 		suiteTearDown();
 	}
-	
+
 	/**
 	 * Se corren solo los test que nunca se hayan corrido
 	 */
-	public void runNotTested(){
+	public void runNotTested() {
 		Reporter reporter = this.prepairTestSuites();
 		for (Test test : tests) {
 			Result result = test.getResult();
-			if(result == null){
+			if (result == null) {
 				this.runParticularTest(reporter, test);
 			}
 		}
@@ -122,29 +122,29 @@ public abstract class TestSuite implements Testeable {
 	private void runParticularTest(Reporter reporter, Test t) {
 		setUp();
 		Date before = new Date();
-		try {
-			if (!(testsToSkip.contains(t.getName())) && isTestInPattern(t)
-					&& testWithAnyTag(t)) {
+		if (!(testsToSkip.contains(t.getName())) && isTestInPattern(t)
+				&& testWithAnyTag(t)) {
+			try {
 				t.setFixture(getFixture());
 				t.run();
-				t.setResult(new ResultOk(t.getName(),
-						getPackageName(), TimerUtils.calculateTimeInSeconds(before)));					
+				t.setResult(new ResultOk(t.getName(), getPackageName(),
+						TimerUtils.calculateTimeInSeconds(before)));
+
+			} catch (AssertFailedException e) {
+				t.setResult(new ResultFail(t.getName(), getPackageName(),
+						TimerUtils.calculateTimeInSeconds(before), e
+								.getMessage()));
+			} catch (Exception e) {
+				t.setResult(new ResultError(t.getName(), getPackageName(),
+						TimerUtils.calculateTimeInSeconds(before), e
+								.getMessage()));
+			} finally {
+				reporter.addResult(t);
+				tearDown();
 			}
-		} catch (AssertFailedException e) {
-			t.setResult(new ResultFail(t.getName(),
-					getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
-							.getMessage()));
-		} catch (Exception e) {
-			t.setResult(new ResultError(t.getName(),
-					getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
-							.getMessage()));
-		}
-		finally{
-			reporter.addResult(t);
-			tearDown();
 		}
 	}
-		
+
 	private boolean testWithAnyTag(Test t) {
 		if (tagsToSearch.size() == 0) {
 			return true;
@@ -198,7 +198,7 @@ public abstract class TestSuite implements Testeable {
 		checkNameInList(testSuite.getName(), testSuites);
 		testSuite.setPackageName(packageName);
 		testSuites.add(testSuite);
-	}	
+	}
 
 	public List<TestSuite> getTestSuites() {
 		return testSuites;
@@ -208,8 +208,8 @@ public abstract class TestSuite implements Testeable {
 		checkNameInList(test.getName(), tests);
 		tests.add(test);
 	}
-	
-	public List<Test> getTests(){
+
+	public List<Test> getTests() {
 		return this.tests;
 	}
 
