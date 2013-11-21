@@ -32,7 +32,7 @@ public class TestForFailedMemory {
 		// Agrego un test que pase, deberia correr un total de dos tests
 		TP2.Test passedTest = createPassedTest("passedTest");
 		testSuite.addTest(passedTest);
-		tester.setRunMode(RunMode.Recover);
+		tester.setRunMode(RunMode.FailedAndNew);
 		tester.execute();
 		assertEquals(2, Reporter.getReporter().getResults().size());
 	}
@@ -58,7 +58,7 @@ public class TestForFailedMemory {
 		// corre el que paso antes)
 		TP2.Test passedTest2 = createPassedTest("passedTest2");
 		testSuite.addTest(passedTest2);
-		tester.setRunMode(RunMode.Recover);
+		tester.setRunMode(RunMode.FailedAndNew);
 		tester.execute();
 		assertEquals(2, Reporter.getReporter().getResults().size());
 	}
@@ -82,7 +82,7 @@ public class TestForFailedMemory {
 		//Agrego un test que no pase, deberia correr un total de dos tests (no se corre el que paso antes)
 		TP2.Test failedTest2 = createFailedTest("failedTest2");
 		testSuite.addTest(failedTest2);
-		tester.setRunMode(RunMode.Recover);
+		tester.setRunMode(RunMode.FailedAndNew);
 		tester.execute();
 		assertEquals(2, Reporter.getReporter().getResults().size());
 		
@@ -91,7 +91,7 @@ public class TestForFailedMemory {
 		//Agrego un test que pase, deberia correr un total de dos tests (los dos que fallaron antes y este)
 		TP2.Test passedTest2 = createPassedTest("passedTest2");
 		testSuite.addTest(passedTest2);
-		tester.setRunMode(RunMode.Recover);
+		tester.setRunMode(RunMode.FailedAndNew);
 		tester.execute();
 		assertEquals(3, Reporter.getReporter().getResults().size());
 	}

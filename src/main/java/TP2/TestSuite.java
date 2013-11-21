@@ -77,16 +77,27 @@ public abstract class TestSuite implements Testeable {
 	}
 	
 	/**
-	 * Se corren solo los test que hayan fallado anteriormente o que no hayan sido corridos
+	 * Se corren solo los test que hayan fallado anteriormente
 	 */
-	public void runFailedAndNotTested(){
+	public void runFailed(){
 		Reporter reporter = this.prepairTestSuites();
 		for (Test test : tests) {
 			Result result = test.getResult();
 			if(result != null && (!result.getState().equals(ResultType.Ok))){
 				this.runParticularTest(reporter, test);
-			}
-			else if(result == null){
+			}			
+		}
+		suiteTearDown();
+	}
+	
+	/**
+	 * Se corren solo los test que nunca se hayan corrido
+	 */
+	public void runNotTested(){
+		Reporter reporter = this.prepairTestSuites();
+		for (Test test : tests) {
+			Result result = test.getResult();
+			if(result == null){
 				this.runParticularTest(reporter, test);
 			}
 		}

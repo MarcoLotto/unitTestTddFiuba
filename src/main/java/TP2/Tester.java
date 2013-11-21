@@ -12,7 +12,7 @@ import java.util.List;
 public class Tester {
 
 	private List<TestSuite> testSuites;
-	private List<TestMemorySlot> alreadyRunnedTests = new ArrayList<TestMemorySlot>();
+	TestMemorySlot lastRunnedTest;
 	private ReportMode reportMode;
 	private RunMode runMode;
 
@@ -39,7 +39,7 @@ public class Tester {
 		this.reportMode = reportMode;
 		this.runMode = runMode;
 	}
-	
+
 	public void setRunMode(RunMode runMode) {
 		this.runMode = runMode;
 	}
@@ -49,47 +49,53 @@ public class Tester {
 	}
 
 	/**
-	 * Ejecuta los test activos en el tester. Si se indica que el recovery mode esta activo se
-	 * correran ademas primero los tests que fallaron la corrida pasada y luego los actuales.
+	 * Ejecuta los test activos en el tester. Si se indica que el FailedAndNew mode
+	 * esta activo se correran ademas primero los tests que fallaron la corrida
+	 * pasada y luego los actuales.
 	 */
 	public void execute() {
 		Reporter.setMode(reportMode);
-		if (this.runMode.equals(RunMode.Recover)) {
-			this.executeRecoverTest();
+		if (this.runMode.equals(RunMode.FailedAndNew)) {
+			this.executeFailedMemoryTest();
+			this.executeNotRunnedTests(this.testSuites);
+		} else if (this.runMode.equals(RunMode.Standard)) {
+			this.executeAllTests(this.testSuites);
 		}
-		else if (this.runMode.equals(RunMode.Standard)) {
-			this.executeTests(this.testSuites);
-		}
-		
+
 		this.saveRunInMemory();
 		Reporter.getReporter().saveResults();
 	}
 
-	private void executeTests(List<TestSuite> testsSuitesToRun) {
+	private void executeAllTests(List<TestSuite> testsSuitesToRun) {
 		for (TestSuite t : testsSuitesToRun) {
 			t.init();
 			t.setRunMode(this.runMode);
 			t.run();
-		}		
+		}
 	}
-
-	private void executeRecoverTest(){
-		int memoryCount = this.alreadyRunnedTests.size(); 
-		if(memoryCount == 0){
-			return;
-		}		
-		TestMemorySlot memory = this.alreadyRunnedTests.get(memoryCount-1);
-		for (TestSuite t : memory.getRunnedTestSuites()) {
+	
+	private void executeNotRunnedTests(List<TestSuite> testsSuitesToRun) {
+		for (TestSuite t : testsSuitesToRun) {
 			t.init();
 			t.setRunMode(this.runMode);
-			t.runFailedAndNotTested();
+			t.runNotTested();
+		}
+	}
+
+	private void executeFailedMemoryTest() {
+		if (this.lastRunnedTest != null) {
+			for (TestSuite t : this.lastRunnedTest.getRunnedTestSuites()) {
+				t.init();
+				t.setRunMode(this.runMode);
+				t.runFailed();
+			}
 		}		
 	}
 
 	private void saveRunInMemory() {
 		TestMemorySlot memory = new TestMemorySlot();
 		memory.setRunnedTestSuites(this.testSuites);
-		this.alreadyRunnedTests.add(memory);
+		this.lastRunnedTest = memory;
 	}
 
 }

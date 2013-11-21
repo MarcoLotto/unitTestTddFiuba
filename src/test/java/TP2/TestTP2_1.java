@@ -123,7 +123,7 @@ public class TestTP2_1 {
 				Assert.isTrue(true, "a test");
 			}
 		};
-		TP2.TestSuite testSuite = new TP2.TestSuite() {
+		TP2.TestSuite testSuite = new TP2.TestSuite("myName") {
 			@Override
 			protected void init() {
 				setPattern(".*special.*");
