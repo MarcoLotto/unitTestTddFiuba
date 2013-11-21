@@ -24,7 +24,8 @@ public abstract class Reporter {
 		mode = ReportMode.Console;
 	}
 
-	public void addResult(Result result) {
+	public void addResult(Test test) {
+		Result result = test.getResult();
 		if (!packageName.equals(result.getPackageName())) {
 			packageName = result.getPackageName();
 			saveResult("");

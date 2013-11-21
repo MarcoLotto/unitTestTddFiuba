@@ -40,7 +40,8 @@ public class ReportXML extends Reporter {
 	}
 
 	@Override
-	public void addResult(Result result) {
+	public void addResult(Test test) {
+		Result result = test.getResult();
 		if (!packageName.equals(result.getPackageName())) {
 			testSuiteChange(result);
 		}

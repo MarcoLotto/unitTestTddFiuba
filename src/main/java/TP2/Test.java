@@ -12,6 +12,7 @@ public abstract class Test implements Testeable {
 	private String name;
 	private Fixture fixture;
 	private List<String> tags;
+	private Result result;
 
 	public Test(String name) {
 		this.name = name;
@@ -57,6 +58,14 @@ public abstract class Test implements Testeable {
 			return false;
 		Test test = (Test) obj;
 		return test.getName().equals(name);
+	}
+
+	public Result getResult() {
+		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
 	}
 	
 }

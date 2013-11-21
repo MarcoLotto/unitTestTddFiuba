@@ -69,6 +69,31 @@ public abstract class TestSuite implements Testeable {
 	protected abstract void init();
 
 	public void run() {
+		Reporter reporter = this.prepairTestSuites();
+		for (Test test : tests) {
+			this.runParticularTest(reporter, test);			
+		}
+		suiteTearDown();
+	}
+	
+	/**
+	 * Se corren solo los test que hayan fallado anteriormente o que no hayan sido corridos
+	 */
+	public void runFailedAndNotTested(){
+		Reporter reporter = this.prepairTestSuites();
+		for (Test test : tests) {
+			Result result = test.getResult();
+			if(result != null && (!result.getState().equals(ResultType.Ok))){
+				this.runParticularTest(reporter, test);
+			}
+			else if(result == null){
+				this.runParticularTest(reporter, test);
+			}
+		}
+		suiteTearDown();
+	}
+
+	private Reporter prepairTestSuites() {
 		suiteSetUp();
 		Reporter reporter = Reporter.getReporter();
 		for (TestSuite t : testSuites) {
@@ -80,31 +105,35 @@ public abstract class TestSuite implements Testeable {
 				t.run();
 			}
 		}
-		for (Test t : tests) {
-			setUp();
-			Date before = new Date();
-			try {
-				if (!(testsToSkip.contains(t.getName())) && isTestInPattern(t)
-						&& testWithAnyTag(t)) {
-					t.setFixture(getFixture());
-					t.run();
-					reporter.addResult(new ResultOk(t.getName(),
-							getPackageName(), TimerUtils.calculateTimeInSeconds(before)));
-				}
-			} catch (AssertFailedException e) {
-				reporter.addResult(new ResultFail(t.getName(),
-						getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
-								.getMessage()));
-			} catch (Exception e) {
-				reporter.addResult(new ResultError(t.getName(),
-						getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
-								.getMessage()));
-			}
-			tearDown();
-		}
-		suiteTearDown();
+		return reporter;
 	}
 
+	private void runParticularTest(Reporter reporter, Test t) {
+		setUp();
+		Date before = new Date();
+		try {
+			if (!(testsToSkip.contains(t.getName())) && isTestInPattern(t)
+					&& testWithAnyTag(t)) {
+				t.setFixture(getFixture());
+				t.run();
+				t.setResult(new ResultOk(t.getName(),
+						getPackageName(), TimerUtils.calculateTimeInSeconds(before)));					
+			}
+		} catch (AssertFailedException e) {
+			t.setResult(new ResultFail(t.getName(),
+					getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
+							.getMessage()));
+		} catch (Exception e) {
+			t.setResult(new ResultError(t.getName(),
+					getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
+							.getMessage()));
+		}
+		finally{
+			reporter.addResult(t);
+			tearDown();
+		}
+	}
+		
 	private boolean testWithAnyTag(Test t) {
 		if (tagsToSearch.size() == 0) {
 			return true;
@@ -158,11 +187,19 @@ public abstract class TestSuite implements Testeable {
 		checkNameInList(testSuite.getName(), testSuites);
 		testSuite.setPackageName(packageName);
 		testSuites.add(testSuite);
+	}	
+
+	public List<TestSuite> getTestSuites() {
+		return testSuites;
 	}
 
 	protected void addTest(Test test) {
 		checkNameInList(test.getName(), tests);
 		tests.add(test);
+	}
+	
+	public List<Test> getTests(){
+		return this.tests;
 	}
 
 	public void setPackageName(String packageName) {
