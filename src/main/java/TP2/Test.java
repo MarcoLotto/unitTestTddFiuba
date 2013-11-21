@@ -17,9 +17,9 @@ public abstract class Test implements Testeable {
 		this.name = name;
 		tags = new LinkedList<String>();
 	}
-
+	
 	public abstract void run();
-
+	
 	public String getName() {
 		return name;
 	}

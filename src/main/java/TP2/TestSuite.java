@@ -84,15 +84,15 @@ public abstract class TestSuite implements Testeable {
 					t.setFixture(getFixture());
 					t.run();
 					reporter.addResult(new ResultOk(t.getName(),
-							getPackageName(), CalculateTimeInSeconds(before)));
+							getPackageName(), TimerUtils.calculateTimeInSeconds(before)));
 				}
 			} catch (AssertFailedException e) {
 				reporter.addResult(new ResultFail(t.getName(),
-						getPackageName(), CalculateTimeInSeconds(before), e
+						getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
 								.getMessage()));
 			} catch (Exception e) {
 				reporter.addResult(new ResultError(t.getName(),
-						getPackageName(), CalculateTimeInSeconds(before), e
+						getPackageName(), TimerUtils.calculateTimeInSeconds(before), e
 								.getMessage()));
 			}
 			tearDown();
@@ -111,13 +111,6 @@ public abstract class TestSuite implements Testeable {
 			}
 		}
 		return false;
-	}
-
-	private double CalculateTimeInSeconds(Date before) {
-		Date after = new Date();
-		double time = after.getTime() - before.getTime();
-		double timeInSeconds = time / 1000;
-		return timeInSeconds;
 	}
 
 	public void addFixture(Fixture fixture) {
